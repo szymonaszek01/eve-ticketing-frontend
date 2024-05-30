@@ -1,0 +1,17 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PublicPageComponent } from '../../../public-page.component';
+
+@Component({
+  selector: 'app-home-page',
+  standalone: true,
+  imports: [],
+  templateUrl: './home-page.component.html',
+  styleUrl: './home-page.component.scss'
+})
+export class HomePageComponent extends PublicPageComponent {
+
+  constructor(router: Router) {
+    super(router);
+  }
+}
