@@ -1,0 +1,56 @@
+// colors
+$primary: #ffffff;
+$secondary: #87d8f3;
+$dimWhite: rgba(255, 255, 255, 0.7);
+$gray30Percentage: rgba(217, 217, 217, 0.3);
+
+mat-toolbar {
+  width: 100%;
+  justify-content: right;
+
+  img {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 85px;
+    height: auto;
+  }
+}
+
+span {
+  font-size: 0.9rem;
+}
+
+mat-icon {
+  color: $secondary;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  transition: width 0.3s ease;
+  border-radius: 0;
+  width: 4rem;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+
+  .entry{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 1.5rem;
+    padding: 0.4rem 0.25rem;
+  }
+}
+
+mat-sidenav-content{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.expanded {
+  width: auto;
+}
