@@ -1,23 +1,28 @@
-// colors
-$primary: #ffffff;
-$secondary: #87d8f3;
-$dimWhite: rgba(255, 255, 255, 0.7);
-$gray30Percentage: rgba(217, 217, 217, 0.3);
+@import "src/styles";
 
 mat-toolbar {
   width: 100%;
   justify-content: right;
+
+  @media screen and (max-width: $breakpoint_first) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   img {
     margin-top: 10px;
     margin-right: 10px;
     width: 85px;
     height: auto;
-  }
-}
 
-span {
-  font-size: 0.9rem;
+    @media screen and (max-width: $breakpoint_first) {
+      margin-top: 0;
+      margin-right: 0;
+      width: 75px
+    ;
+    }
+  }
 }
 
 mat-icon {
@@ -37,7 +42,7 @@ mat-sidenav {
   width: 4rem;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 
-  .entry{
+  .entry {
     display: flex;
     align-items: center;
     justify-content: left;
@@ -46,11 +51,15 @@ mat-sidenav {
   }
 }
 
-mat-sidenav-content{
+mat-sidenav-content {
   padding-left: 2rem;
   padding-right: 2rem;
 }
 
 .expanded {
   width: auto;
+
+  @media screen and (max-width: $breakpoint_first) {
+    width: 100%;
+  }
 }

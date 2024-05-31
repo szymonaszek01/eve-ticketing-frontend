@@ -34,11 +34,32 @@ $eve-ticketing-frontend-theme: mat.define-theme((
 // @include mat.color-variants-backwards-compatibility($theme);
 /* You can add global styles to this file, and also import other style files */
 
+// COLORS
+$primary: #ffffff;
+$secondary: #87d8f3;
+$dimWhite: rgba(255, 255, 255, 0.7);
+$gray30Percentage: rgba(217, 217, 217, 0.3);
+
+// BREAKPOINTS
+$breakpoint_first: 768px;
+$breakpoint_second: 380px;
+$breakpoint_third: 180px;
+
+// FONT
+$font_family: Roboto, 'Helvetica Neue', sans-serif;
+$font_size_small: 0.7rem;
+$font_size_normal: 0.9rem;
+$font_size_large: 2rem;
+
+// GLOBAL STYLES
 html, body {
   height: 100%;
+  margin: 0;
+  font-family: $font_family;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+span {
+  font-size: $font_size_normal;
 }

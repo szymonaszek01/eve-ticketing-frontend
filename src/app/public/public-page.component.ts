@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SideBarComponent } from './shared/components/side-bar/side-bar.component';
+import { SideBarRoute } from './shared/model/SideBarRoute';
 
 @Component({
   selector: 'app-public-page',
@@ -15,8 +16,27 @@ export class PublicPageComponent {
 
   protected router: Router;
 
+  protected routeList: SideBarRoute[];
+
   constructor(router: Router) {
     this.router = router;
+    this.routeList = [{
+      path: '/',
+      icon: 'house',
+      label: 'Home'
+    }, {
+      path: '/login',
+      icon: 'login',
+      label: 'Login'
+    }, {
+      path: '/contact',
+      icon: 'mail',
+      label: 'Contact'
+    }, {
+      path: '/settings',
+      icon: 'settings',
+      label: 'Settings'
+    }];
   }
 
   protected navigate(routeName: string): void {
