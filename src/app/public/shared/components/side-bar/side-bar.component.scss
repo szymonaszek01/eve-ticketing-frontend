@@ -40,7 +40,7 @@ mat-sidenav {
   transition: width 0.3s ease;
   border-radius: 0;
   width: 4rem;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+  box-shadow: $box_shadow;
 
   .entry {
     display: flex;

@@ -51,6 +51,9 @@ $font_size_small: 0.7rem;
 $font_size_normal: 0.9rem;
 $font_size_large: 2rem;
 
+// BOX SHADOW
+$box_shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+
 // GLOBAL STYLES
 html, body {
   height: 100%;
@@ -62,4 +65,13 @@ html, body {
 
 span {
   font-size: $font_size_normal;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: wrap;
 }
