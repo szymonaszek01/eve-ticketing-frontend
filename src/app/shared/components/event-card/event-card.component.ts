@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Event } from '../../models/Event';
+import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
@@ -10,4 +11,10 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class EventCardComponent {
 
+  @Input()
+  public event: Event;
+
+  constructor() {
+    this.event = {} as Event;
+  }
 }

@@ -1,4 +1,5 @@
-abstract class BaseService<T, U> {
+
+export abstract class BaseService<T, U> {
 
   protected toCamelCase(entity: any): T {
     const newEntity: any = {};
@@ -30,7 +31,7 @@ abstract class BaseService<T, U> {
     return newEntity;
   }
 
-  abstract getAll(page: number, size: number, filter: U): T[];
+  abstract getAll(page: number, size: number, filter: U | undefined): T[];
 
   /**
    * @throws {ApiError}

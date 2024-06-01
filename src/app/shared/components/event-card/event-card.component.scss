@@ -2,6 +2,16 @@
 
 mat-card {
   width: 100%;
-  background: $primary;
+  background: transparent;
   box-shadow: $box_shadow;
+}
+
+mat-card-header {
+  color: $primary;
+  padding-top: $padding_small;
+  padding-bottom: $padding_small;
+}
+
+mat-card-title {
+  font-weight: 500;
 }
