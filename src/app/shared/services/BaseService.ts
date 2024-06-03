@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { Page } from '../models/Page';
 
 export abstract class BaseService<T, U> {
 
@@ -31,26 +33,26 @@ export abstract class BaseService<T, U> {
     return newEntity;
   }
 
-  abstract getAll(page: number, size: number, filter: U | undefined): T[];
+  abstract getAll(page: number, size: number, filter: U | undefined): Observable<Page<T>>;
 
   /**
    * @throws {ApiError}
    */
-  abstract getOne(id: number): T | undefined;
+  abstract getOne(id: number): Observable<T>;
 
   /**
    * @throws {ApiError}
    */
-  abstract create(event: T): T | undefined;
+  abstract create(event: T): Observable<T>;
 
   /**
    * @throws {ApiError}
    */
-  abstract update(event: T): T | undefined;
+  abstract update(event: T): Observable<T>;
 
   /**
    * @throws {ApiError}
    */
-  abstract delete(id: number): void;
+  abstract delete(id: number): Observable<void>;
 }
 

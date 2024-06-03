@@ -2,6 +2,8 @@ import { Event } from '../models/Event';
 import { EventFilterDto } from '../dtos/EventFilterDto';
 import { Injectable } from '@angular/core';
 import { BaseService } from './BaseService';
+import { Observable, of } from 'rxjs';
+import { Page } from '../models/Page';
 
 @Injectable({
   providedIn: 'root'
@@ -44,22 +46,50 @@ export class EventService extends BaseService<Event, EventFilterDto> {
     adminId: 1
   }];
 
-  create(event: Event): Event | undefined {
-    return this.eventList[0];
+  create(event: Event): Observable<Event> {
+    return of<Event>(this.eventList[0]);
   }
 
-  delete(id: number): void {
+  delete(id: number): Observable<void> {
+    return of<void>();
   }
 
-  getAll(page: number, size: number, filter: EventFilterDto | undefined): Event[] {
-    return this.eventList;
+  getAll(page: number, size: number, filter: EventFilterDto | undefined): Observable<Page<Event>> {
+    return of<Page<Event>>({
+      content: this.eventList,
+      pageable: {
+        sort: {
+          empty: true,
+          sorted: false,
+          unsorted: true
+        },
+        offset: 0,
+        pageNumber: 0,
+        pageSize: 5,
+        unpaged: false,
+        paged: true
+      },
+      last: false,
+      totalPages: 20,
+      totalElements: 100,
+      size: 5,
+      number: 0,
+      sort: {
+        empty: true,
+        sorted: false,
+        unsorted: true
+      },
+      numberOfElements: 5,
+      first: true,
+      empty: false
+    });
   }
 
-  getOne(id: number): Event | undefined {
-    return this.eventList[id < 2 ? id : 0];
+  getOne(id: number): Observable<Event> {
+    return of<Event>(this.eventList[id < 2 ? id : 0]);
   }
 
-  update(event: Event): Event | undefined {
-    return this.eventList[0];
+  update(event: Event): Observable<Event> {
+    return of<Event>(this.eventList[0]);
   }
 }
