@@ -1,0 +1,20 @@
+@import "src/styles";
+
+.flex-container {
+  width: auto;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  span#label {
+    color: $secondary;
+    font-size: $font_size_small;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  span#value {
+    color: $primary;
+    font-size: $font_size_normal;
+    font-weight: 400;
+  }
+}
