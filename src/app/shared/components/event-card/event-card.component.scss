@@ -2,16 +2,40 @@
 
 mat-card {
   width: 100%;
-  background: transparent;
+  background: $dimWhite;
   box-shadow: $box_shadow;
+  padding: 0.7rem;
 }
 
 mat-card-header {
-  color: $primary;
   padding-top: $padding_small;
   padding-bottom: $padding_small;
 }
 
 mat-card-title {
+  color: $primary;
+  font-size: $font_size_large;
   font-weight: 500;
+}
+
+mat-card-subtitle {
+  color: $secondary;
+  font-size: $font_size_normal;
+  font-weight: 400;
+}
+
+mat-card-title + mat-card-subtitle {
+  margin-top: $margin_small;
+}
+
+mat-card-actions {
+  margin-top: $margin_normal;
+}
+
+.flex-container + .flex-container {
+  margin-top: $font_size_normal;
+}
+
+.flex-container#custom-tab-list {
+  gap: 4rem;
 }

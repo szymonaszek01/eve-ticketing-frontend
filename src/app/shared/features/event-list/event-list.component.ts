@@ -3,7 +3,7 @@ import { EventCardComponent } from '../../components/event-card/event-card.compo
 import { EventService } from '../../services/EventService';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {Event} from '../../models/Event';
+import { Event } from '../../models/Event';
 
 @Component({
   selector: 'app-event-list',
@@ -24,6 +24,10 @@ export class EventListComponent {
 
   constructor(eventService: EventService) {
     this.eventService = eventService;
-    this.eventList = eventService.getAll(0, 2, undefined);
+    this.eventList = [];
+  }
+
+  ngOnInit(): void {
+    this.eventService.getAll(0, 2, undefined).subscribe(response => this.eventList = response.content);
   }
 }
