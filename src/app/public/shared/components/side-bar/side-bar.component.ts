@@ -8,7 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { SideBarRoute } from '../../models/SideBarRoute';
+import { SideBarRoute } from '../../models/side-bar-route';
 
 @Component({
   selector: 'app-side-bar',

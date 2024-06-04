@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { EventCardComponent } from '../../components/event-card/event-card.component';
-import { EventService } from '../../services/EventService';
+import { EventService } from '../../services/event-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Event } from '../../models/Event';
+import { Event } from '../../models/event';
 
 @Component({
   selector: 'app-event-list',

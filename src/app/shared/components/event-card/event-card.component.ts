@@ -1,4 +1,4 @@
-import { Event } from '../../models/Event';
+import { Event } from '../../models/event';
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatChip } from '@angular/material/chips';

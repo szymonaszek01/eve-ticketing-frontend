@@ -1,4 +1,4 @@
-import { BaseEntity } from './BaseEntity';
+import { BaseEntity } from './base-entity';
 
 export interface Event extends BaseEntity {
   name: string;

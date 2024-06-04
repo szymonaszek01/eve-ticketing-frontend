@@ -1,9 +1,9 @@
-import { Event } from '../models/Event';
-import { EventFilterDto } from '../dtos/EventFilterDto';
+import { Event } from '../models/event';
+import { EventFilterDto } from '../dtos/event-filter-dto';
 import { Injectable } from '@angular/core';
-import { BaseService } from './BaseService';
+import { BaseService } from './base-service';
 import { Observable, of } from 'rxjs';
-import { Page } from '../models/Page';
+import { Page } from '../models/page';
 import { delay } from 'rxjs/operators';
 
 @Injectable({

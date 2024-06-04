@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Page } from '../models/Page';
+import { Page } from '../models/page';
 
 export abstract class BaseService<T, U> {
 
