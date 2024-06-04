@@ -1,4 +1,4 @@
-export interface EventFilterDto {
+export interface EventFilter {
   name: string;
   minUnitPrice: number;
   maxUnitPrice: number;

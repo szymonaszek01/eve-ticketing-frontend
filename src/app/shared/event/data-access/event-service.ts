@@ -1,15 +1,15 @@
 import { Event } from '../models/event';
-import { EventFilterDto } from '../dtos/event-filter-dto';
+import { EventFilter } from '../models/event-filter';
 import { Injectable } from '@angular/core';
-import { BaseService } from './base-service';
+import { BaseService } from '../../shared/data-access/base-service';
 import { Observable, of } from 'rxjs';
-import { Page } from '../models/page';
+import { Page } from '../../shared/models/page';
 import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventService extends BaseService<Event, EventFilterDto> {
+export class EventService extends BaseService<Event, EventFilter> {
 
   private eventList: Event[] = [{
     id: 1,
@@ -55,7 +55,7 @@ export class EventService extends BaseService<Event, EventFilterDto> {
     return of<void>().pipe(delay(3000));
   }
 
-  getAll(page: number, size: number, filter: EventFilterDto | undefined): Observable<Page<Event>> {
+  getAll(page: number, size: number, filter: EventFilter | undefined): Observable<Page<Event>> {
     return of<Page<Event>>({
       content: this.eventList,
       pageable: {

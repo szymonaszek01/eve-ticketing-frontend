@@ -1,4 +1,4 @@
-import { BaseEntity } from './base-entity';
+import { BaseEntity } from '../../shared/models/base-entity';
 
 export interface Event extends BaseEntity {
   name: string;

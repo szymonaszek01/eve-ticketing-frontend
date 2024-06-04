@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChip } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CustomTabComponent } from '../custom-tab/custom-tab.component';
+import { CustomTabComponent } from '../../../shared/components/custom-tab/custom-tab.component';
 import { MatButton } from '@angular/material/button';
 
 @Component({

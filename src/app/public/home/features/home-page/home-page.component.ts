@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PublicPageComponent } from '../../../public-page.component';
-import { EventListComponent } from '../../../../shared/features/event-list/event-list.component';
+import { EventListComponent } from '../../../../shared/event/features/event-list/event-list.component';
 
 @Component({
   selector: 'app-home-page',
