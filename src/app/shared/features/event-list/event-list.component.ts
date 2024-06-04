@@ -20,10 +20,7 @@ export class EventListComponent {
 
   public eventList: Event[];
 
-  private eventService: EventService;
-
-  constructor(eventService: EventService) {
-    this.eventService = eventService;
+  constructor(private eventService: EventService) {
     this.eventList = [];
   }
 

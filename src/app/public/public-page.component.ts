@@ -14,11 +14,9 @@ import { SideBarRoute } from './shared/models/SideBarRoute';
 })
 export class PublicPageComponent {
 
-  protected router: Router;
-
   protected routeList: SideBarRoute[];
 
-  constructor(router: Router) {
+  constructor(protected router: Router) {
     this.router = router;
     this.routeList = [{
       path: '/',

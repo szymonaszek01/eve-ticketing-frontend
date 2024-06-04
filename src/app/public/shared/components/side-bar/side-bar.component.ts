@@ -40,13 +40,11 @@ export class SideBarComponent {
 
   protected isCollapsed: boolean;
 
-  private observer: BreakpointObserver;
-
-  constructor(observer: BreakpointObserver) {
+  constructor(private observer: BreakpointObserver) {
+    this.routeList = [];
     this.isMobile = true;
     this.isCollapsed = false;
     this.observer = observer;
-    this.routeList = [];
   }
 
   ngOnInit(): void {

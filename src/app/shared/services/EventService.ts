@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './BaseService';
 import { Observable, of } from 'rxjs';
 import { Page } from '../models/Page';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -47,11 +48,11 @@ export class EventService extends BaseService<Event, EventFilterDto> {
   }];
 
   create(event: Event): Observable<Event> {
-    return of<Event>(this.eventList[0]);
+    return of<Event>(this.eventList[0]).pipe(delay(3000));
   }
 
   delete(id: number): Observable<void> {
-    return of<void>();
+    return of<void>().pipe(delay(3000));
   }
 
   getAll(page: number, size: number, filter: EventFilterDto | undefined): Observable<Page<Event>> {
@@ -82,14 +83,14 @@ export class EventService extends BaseService<Event, EventFilterDto> {
       numberOfElements: 5,
       first: true,
       empty: false
-    });
+    }).pipe(delay(3000));
   }
 
   getOne(id: number): Observable<Event> {
-    return of<Event>(this.eventList[id < 2 ? id : 0]);
+    return of<Event>(this.eventList[id < 2 ? id : 0]).pipe(delay(3000));
   }
 
   update(event: Event): Observable<Event> {
-    return of<Event>(this.eventList[0]);
+    return of<Event>(this.eventList[0]).pipe(delay(3000));
   }
 }

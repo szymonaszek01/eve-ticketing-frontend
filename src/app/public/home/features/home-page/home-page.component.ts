@@ -14,7 +14,7 @@ import { EventListComponent } from '../../../../shared/features/event-list/event
 })
 export class HomePageComponent extends PublicPageComponent {
 
-  constructor(router: Router) {
+  constructor(protected router: Router) {
     super(router);
   }
 }

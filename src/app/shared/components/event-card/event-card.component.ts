@@ -19,14 +19,7 @@ export class EventCardComponent {
   @Input()
   public event: Event;
 
-  public chipList: string[];
-
   constructor() {
     this.event = {} as Event;
-    this.chipList = [
-      this.event.country,
-      this.event.address
-    ].concat(this.event.localizationName ? [this.event.localizationName] : [])
-      .concat([this.event.country + this.event.currency]);
   }
 }
