@@ -1,7 +1,15 @@
 import { Observable } from 'rxjs';
 import { Page } from '../models/page';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export abstract class BaseService<T, U> {
+
+  constructor(protected http: HttpClient) {
+  }
 
   protected toCamelCase(entity: any): T {
     const newEntity: any = {};

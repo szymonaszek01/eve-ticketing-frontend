@@ -2,9 +2,10 @@ import { Event } from '../models/event';
 import { EventFilter } from '../models/event-filter';
 import { Injectable } from '@angular/core';
 import { BaseService } from '../../shared/data-access/base-service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Page } from '../../shared/models/page';
-import { delay } from 'rxjs/operators';
+import { catchError, delay, map } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -56,34 +57,17 @@ export class EventService extends BaseService<Event, EventFilter> {
   }
 
   getAll(page: number, size: number, filter: EventFilter | undefined): Observable<Page<Event>> {
-    return of<Page<Event>>({
-      content: this.eventList,
-      pageable: {
-        sort: {
-          empty: true,
-          sorted: false,
-          unsorted: true
-        },
-        offset: 0,
-        pageNumber: 0,
-        pageSize: 10,
-        unpaged: false,
-        paged: true
-      },
-      last: false,
-      totalPages: 1,
-      totalElements: 2,
-      size: 10,
-      number: 0,
-      sort: {
-        empty: true,
-        sorted: false,
-        unsorted: true
-      },
-      numberOfElements: 2,
-      first: true,
-      empty: false
-    }).pipe(delay(3000));
+    return this.http.get<Page<Event>>(environment.apiUrl + environment.eventApiUrl + '/all', {params: {page, size}}).pipe(
+      map(response => ({
+        ...response,
+        content: response.content.map(event => this.toCamelCase(event)).map(event => ({
+          ...event,
+          startAt: new Date(event.startAt),
+          endAt: new Date(event.endAt)
+        }))
+      })),
+      catchError(error => throwError(error))
+    );
   }
 
   getOne(id: number): Observable<Event> {
