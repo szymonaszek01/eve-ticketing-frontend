@@ -1,6 +1,6 @@
 import { ApiError } from './api-error';
 
-export interface State<T> {
+export interface BaseState<T> {
   list: T[];
   lastAdded: T | undefined;
   lastUpdated: T | undefined;

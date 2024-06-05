@@ -4,6 +4,10 @@ import { EventService } from '../../data-access/event-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Event } from '../../models/event';
+import { BaseState } from '../../../shared/models/base-state';
+import { Store } from '@ngrx/store';
+import { eventActions } from '../../data-access/event-actions';
+import { selectList } from '../../data-access/event-reducers';
 
 @Component({
   selector: 'app-event-list',
@@ -20,11 +24,12 @@ export class EventListComponent {
 
   public eventList: Event[];
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private store: Store<{ event: BaseState<Event> }>) {
     this.eventList = [];
+    this.store.dispatch(eventActions.load({page: 0, size: 10, filter: undefined}));
   }
 
   ngOnInit(): void {
-    this.eventService.getAll(0, 2, undefined).subscribe(response => this.eventList = response.content);
+    this.store.select(selectList).subscribe(eventList => this.eventList = eventList);
   }
 }

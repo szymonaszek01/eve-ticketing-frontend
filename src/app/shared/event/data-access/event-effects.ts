@@ -1,63 +1,76 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { EventService } from './event-service';
 import { eventActions } from './event-actions';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-@Injectable()
-export class EventEffects {
-
-  loadEventList$ = createEffect(() =>
-    this.actions$.pipe(
+export const loadEventListEffect = createEffect(
+  (actions$ = inject(Actions),
+   eventService = inject(EventService)) => {
+    return actions$.pipe(
       ofType(eventActions.load),
       mergeMap(action =>
-        this.eventService.getAll(action.page, action.size, action.filter).pipe(
+        eventService.getAll(action.page, action.size, action.filter).pipe(
           map(page => eventActions.loadSuccess({page})),
           catchError(error => of(eventActions.loadError({error})))
         )
       )
-    ), {functional: true}
-  );
+    );
+  }, {functional: true}
+);
 
-  addEvent$ = createEffect(() =>
-    this.actions$.pipe(
+export const addEventEffect = createEffect(
+  (actions$ = inject(Actions),
+   eventService = inject(EventService)) => {
+    return actions$.pipe(
       ofType(eventActions.add),
       mergeMap(action =>
-        this.eventService.create(action.event).pipe(
+        eventService.create(action.event).pipe(
           map(event => eventActions.addSuccess({event})),
           catchError(error => of(eventActions.loadError(error)))
         )
       )
-    ), {functional: true}
-  );
+    );
+  }, {functional: true}
+);
 
-  replaceEvent$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(eventActions.replace),
+export const updateEventEffect = createEffect(
+  (actions$ = inject(Actions),
+   eventService = inject(EventService)) => {
+    return actions$.pipe(
+      ofType(eventActions.update),
       mergeMap(action =>
-        this.eventService.update(action.event).pipe(
-          map(event => eventActions.replaceSuccess({event})),
+        eventService.update(action.event).pipe(
+          map(event => eventActions.updateSuccess({event})),
           catchError(error => of(eventActions.loadError(error)))
         )
       )
-    ), {functional: true}
-  );
+    );
+  }, {functional: true}
+);
 
-  removeEvent$ = createEffect(() =>
-    this.actions$.pipe(
+export const removeEventEffect = createEffect(
+  (actions$ = inject(Actions),
+   eventService = inject(EventService)) => {
+    return actions$.pipe(
       ofType(eventActions.remove),
       mergeMap(action =>
-        this.eventService.delete(action.event.id).pipe(
+        eventService.delete(action.event.id).pipe(
           map(() => eventActions.removeSuccess({event: action.event})),
           catchError(error => of(eventActions.loadError(error)))
         )
       )
-    ), {functional: true}
-  );
+    );
+  }, {functional: true}
+);
 
-  clearEventList$ = createEffect(() => this.actions$.pipe(ofType(eventActions.clear)), {functional: true});
-
-  constructor(private actions$: Actions, private eventService: EventService) {
-  }
-}
+export const clearEventListEffect = createEffect(
+  (actions$ = inject(Actions),
+   eventService = inject(EventService)) => {
+    return actions$.pipe(
+      ofType(eventActions.clear),
+      tap(() => console.log('[Event] state was cleared'))
+    );
+  }, {functional: true}
+);

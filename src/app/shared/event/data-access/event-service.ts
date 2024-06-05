@@ -66,21 +66,21 @@ export class EventService extends BaseService<Event, EventFilter> {
         },
         offset: 0,
         pageNumber: 0,
-        pageSize: 5,
+        pageSize: 10,
         unpaged: false,
         paged: true
       },
       last: false,
-      totalPages: 20,
-      totalElements: 100,
-      size: 5,
+      totalPages: 1,
+      totalElements: 2,
+      size: 10,
       number: 0,
       sort: {
         empty: true,
         sorted: false,
         unsorted: true
       },
-      numberOfElements: 5,
+      numberOfElements: 2,
       first: true,
       empty: false
     }).pipe(delay(3000));

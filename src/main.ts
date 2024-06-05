@@ -7,7 +7,9 @@ import { provideState, provideStore } from '@ngrx/store';
 import { provideHttpClient } from '@angular/common/http';
 import { isDevMode } from '@angular/core';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { eventFeature } from './app/shared/event/data-access/event-reducers';
+import { eventFeatureKey, eventReducer } from './app/shared/event/data-access/event-reducers';
+import * as eventEffects from './app/shared/event/data-access/event-effects';
+import { provideEffects } from '@ngrx/effects';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -15,7 +17,8 @@ bootstrapApplication(AppComponent, {
     provideRouter(appRoutes),
     provideAnimationsAsync(),
     provideStore(),
-    provideState(eventFeature),
+    provideState(eventFeatureKey, eventReducer),
+    provideEffects(eventEffects),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
