@@ -1,3 +1,3 @@
-<div *ngFor="let event of this.eventList" class="w-full mt-large">
+<div *ngFor="let event of this.eventList; index as i" class="{{i > 0 ? 'w-full mt-large' : 'w-full mt-normal'}}">
   <app-event-card [event]="this.event"></app-event-card>
 </div>

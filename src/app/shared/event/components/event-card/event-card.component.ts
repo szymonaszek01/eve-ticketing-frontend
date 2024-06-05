@@ -22,4 +22,6 @@ export class EventCardComponent {
   constructor() {
     this.event = {} as Event;
   }
+
+  protected readonly Date = Date;
 }

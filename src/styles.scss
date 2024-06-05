@@ -71,6 +71,7 @@ html, body {
   font-family: $font_family;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  overflow: hidden;
 }
 
 span {

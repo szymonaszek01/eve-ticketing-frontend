@@ -54,6 +54,21 @@ mat-sidenav {
 mat-sidenav-content {
   padding-left: 2rem;
   padding-right: 2rem;
+
+  &::-webkit-scrollbar {
+    width: 0.6rem;
+    background-color: $dimWhite;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $secondary;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    box-shadow: $box_shadow;
+  }
 }
 
 .expanded {

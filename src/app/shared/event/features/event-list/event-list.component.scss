@@ -1,5 +1,11 @@
 @import "src/styles";
 
+$margin_large: 5rem;
+
 .mt-large {
   margin-top: $margin_large;
+}
+
+.mt-normal {
+  margin-top: $margin_normal;
 }
