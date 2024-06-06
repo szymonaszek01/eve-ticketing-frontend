@@ -16,12 +16,20 @@ mat-card-title {
   color: $primary;
   font-size: $font_size_large;
   font-weight: 500;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    text-align: center;
+  }
 }
 
 mat-card-subtitle {
   color: $secondary;
   font-size: $font_size_normal;
   font-weight: 400;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    text-align: center;
+  }
 }
 
 mat-card-title + mat-card-subtitle {
@@ -32,10 +40,29 @@ mat-card-actions {
   margin-top: $margin_normal;
 }
 
+.flex-container {
+  @media screen and (max-width: $breakpoint_zero) {
+    flex-direction: column;
+  }
+}
+
 .flex-container + .flex-container {
   margin-top: $font_size_normal;
 }
 
 .flex-container#custom-tab-list {
-  gap: 4rem;
+  gap: 2rem;
+  flex-direction: row;
+  flex-flow: wrap;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+.mdc-card__actions {
+  @media screen and (max-width: $breakpoint_zero) {
+    justify-content: center;
+  }
 }

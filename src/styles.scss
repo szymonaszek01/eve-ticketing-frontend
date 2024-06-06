@@ -41,6 +41,7 @@ $dimWhite: rgba(255, 255, 255, 0.04);
 $gray30Percentage: rgba(217, 217, 217, 0.3);
 
 // BREAKPOINTS
+$breakpoint_zero: 1050px;
 $breakpoint_first: 768px;
 $breakpoint_second: 380px;
 $breakpoint_third: 180px;
@@ -91,4 +92,14 @@ span {
   @media screen and (max-width: $breakpoint_first) {
     flex-direction: column;
   }
+}
+
+.mdc-evolution-chip-set__chips {
+  max-width: 100% !important;
+}
+
+.mat-mdc-standard-chip .mdc-evolution-chip__cell--primary,
+.mat-mdc-standard-chip .mdc-evolution-chip__action--primary,
+.mat-mdc-standard-chip .mat-mdc-chip-action-label {
+  overflow: hidden !important;
 }
