@@ -1,0 +1,36 @@
+@import "src/styles";
+
+.flex-container {
+  width: auto;
+
+  img {
+    width: auto;
+    height: 2rem;
+
+    @media screen and (max-width: $breakpoint_first) {
+      display: none;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $secondary;
+    font-size: $font_size_normal;
+
+    @media screen and (max-width: $breakpoint_first) {
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint_first) {
+    flex-flow: wrap;
+    justify-content: center;
+  }
+}
+
+.my-large {
+  margin-top: 7rem;
+  margin-bottom: 8rem;
+  border-top: 2px solid $secondary;
+  padding-top: 2rem;
+}

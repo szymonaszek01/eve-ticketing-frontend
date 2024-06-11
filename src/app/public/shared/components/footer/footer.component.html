@@ -1,0 +1,11 @@
+<div class="w-full flex-container space-between items-center my-large">
+  <div class="flex-container">
+    <app-rounded-icon [iconName]="'facebook'"></app-rounded-icon>
+    <app-rounded-icon [iconName]="'apple'"></app-rounded-icon>
+    <app-rounded-icon [iconName]="'snapchat'"></app-rounded-icon>
+  </div>
+  <div class="flex-container">
+    <a *ngFor="let route of this.routeList" href="{{route.path}}">{{route.label}}</a>
+  </div>
+  <img ngSrc="../../../../../assets/logo.png" alt="logo" height="382" width="1500">
+</div>
