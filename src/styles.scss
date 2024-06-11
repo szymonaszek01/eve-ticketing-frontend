@@ -103,3 +103,15 @@ span {
 .mat-mdc-standard-chip .mat-mdc-chip-action-label {
   overflow: hidden !important;
 }
+
+.rounded-full {
+  border-radius: 100%;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}

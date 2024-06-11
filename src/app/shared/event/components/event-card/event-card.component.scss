@@ -16,6 +16,7 @@ mat-card-title {
   color: $primary;
   font-size: $font_size_large;
   font-weight: 500;
+  word-break: break-word;
 
   @media screen and (max-width: $breakpoint_zero) {
     text-align: center;
