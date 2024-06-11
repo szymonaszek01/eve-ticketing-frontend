@@ -11,6 +11,7 @@ const initialState: BaseState<Event> = {
   page: 0,
   size: 0,
   totalPages: 0,
+  totalElements: 0,
   last: true,
   loading: false,
   error: undefined
@@ -22,10 +23,11 @@ const eventFeature = createFeature({
     on(eventActions.load, state => ({...state, loading: true})),
     on(eventActions.loadSuccess, (state, {page}) => ({
       ...state,
-      list: [...state.list, ...page.content],
+      list: page.content,
       page: page.number,
       size: page.size,
       totalPages: page.totalPages,
+      totalElements: page.totalElements,
       last: page.last,
       loading: false
     })),
@@ -43,6 +45,7 @@ const eventFeature = createFeature({
       page: 0,
       size: 0,
       totalPages: 0,
+      totalElements: 0,
       last: true
     })),
     on(eventActions.loadError, (state, {error}) => ({...state, error, loading: false}))
@@ -59,6 +62,7 @@ export const {
   selectPage,
   selectSize,
   selectTotalPages,
+  selectTotalElements,
   selectLast,
   selectLoading,
   selectError

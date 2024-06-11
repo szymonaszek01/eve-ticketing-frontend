@@ -8,6 +8,7 @@ export interface BaseState<T> {
   page: number;
   size: number;
   totalPages: number;
+  totalElements: number;
   last: boolean;
   loading: boolean;
   error: ApiError | undefined;
