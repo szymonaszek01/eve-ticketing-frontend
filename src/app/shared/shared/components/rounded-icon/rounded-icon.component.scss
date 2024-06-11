@@ -1,0 +1,18 @@
+@import "src/styles";
+
+.bg-dim-white {
+  display: flex;
+  background: $dimWhite;
+  box-shadow: $box_shadow;
+  width: 4rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+
+
+  mat-icon {
+    color: $secondary;
+    margin-top: 0.2rem;
+    transform: scale(1.35);
+  }
+}
