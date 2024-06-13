@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { eventActions } from '../../data-access/event-actions';
 import { selectList, selectPage, selectSize, selectTotalElements } from '../../data-access/event-reducers';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { EventFilterComponent } from '../event-filter/event-filter.component';
 
 @Component({
   selector: 'app-event-list',
@@ -17,7 +18,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
     EventCardComponent,
     CommonModule,
     FormsModule,
-    MatPaginator
+    MatPaginator,
+    EventFilterComponent
   ],
   templateUrl: './event-list.component.html',
   styleUrl: './event-list.component.scss'

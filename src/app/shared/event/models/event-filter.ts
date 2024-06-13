@@ -2,8 +2,8 @@ export interface EventFilter {
   name: string;
   minUnitPrice: number;
   maxUnitPrice: number;
-  minDate: Date;
-  maxDate: Date;
+  minDate: string;
+  maxDate: string;
   country: string;
   address: string;
 }

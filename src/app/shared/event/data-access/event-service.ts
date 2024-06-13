@@ -57,7 +57,7 @@ export class EventService extends BaseService<Event, EventFilter> {
   }
 
   getAll(page: number, size: number, filter: EventFilter | undefined): Observable<Page<Event>> {
-    return this.http.get<Page<Event>>(environment.apiUrl + environment.eventApiUrl + '/all', {params: {page, size}}).pipe(
+    return this.http.get<Page<Event>>(environment.apiUrl + environment.eventApiUrl + '/all', {params: {page, size, ...filter}}).pipe(
       map(response => ({
         ...response,
         content: response.content.map(event => this.toCamelCase(event)).map(event => ({

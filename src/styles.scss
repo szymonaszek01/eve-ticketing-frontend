@@ -66,6 +66,14 @@ $padding_large: 2rem;
 $box_shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 
 // GLOBAL STYLES
+:host {
+  --mat-form-field-container-text-line-height: 1.05rem;
+  --mat-form-field-container-text-size: 0.85rem;
+  --mdc-outlined-text-field-label-text-size: 0.85rem;
+  --mat-form-field-container-height: 45px;
+  --mat-form-field-container-vertical-padding: 0.9rem;
+}
+
 html, body {
   height: 100%;
   margin: 0;
