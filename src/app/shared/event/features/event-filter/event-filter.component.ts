@@ -81,9 +81,14 @@ export class EventFilterComponent {
 
   protected submitForm(): void {
     const eventFilter: any = {};
+    if (!this.filterForm.valid) {
+      console.log('Not Valid');
+    }
     for (const valueKey in this.filterForm.value) {
       if (this.filterForm.value.hasOwnProperty(valueKey) && this.filterForm.value[valueKey]) {
-        eventFilter[valueKey] = this.filterForm.value[valueKey];
+        eventFilter[valueKey] = (valueKey.includes('minDate') || valueKey.includes('maxDate'))
+          ? this.filterForm.value[valueKey].toISOString()
+          : this.filterForm.value[valueKey];
       }
     }
     this.store.dispatch(eventActions.load({page: 0, size: 10, filter: eventFilter as EventFilter}));
