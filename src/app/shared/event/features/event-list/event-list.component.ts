@@ -7,7 +7,7 @@ import { Event } from '../../models/event';
 import { BaseState } from '../../../shared/models/base-state';
 import { Store } from '@ngrx/store';
 import { eventActions } from '../../data-access/event-actions';
-import { selectFilter, selectList, selectPage, selectSize, selectTotalElements } from '../../data-access/event-reducers';
+import { selectFilter, selectList, selectPage, selectSize, selectSort, selectTotalElements } from '../../data-access/event-reducers';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { EventFilterComponent } from '../event-filter/event-filter.component';
 import { EventFilter } from '../../models/event-filter';
@@ -39,12 +39,15 @@ export class EventListComponent {
 
   private filter: EventFilter | undefined;
 
+  private sort: string[] | undefined;
+
   constructor(private eventService: EventService, private store: Store<{ event: BaseState<Event> }>) {
     this.eventList = [];
     this.page = 0;
     this.size = 0;
     this.totalElements = 0;
     this.filter = undefined;
+    this.sort = undefined;
     this.store.dispatch(eventActions.load({page: 0, size: 10, filter: undefined, sort: undefined}));
   }
 
@@ -55,11 +58,15 @@ export class EventListComponent {
     this.store.select(selectTotalElements).subscribe(totalElements => this.totalElements = totalElements);
     this.store.select(selectFilter).subscribe(filter => {
       this.filter = filter;
-      this.store.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: undefined}));
+      this.store.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+    });
+    this.store.select(selectSort).subscribe(sort => {
+      this.sort = sort;
+      this.store.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
     });
   }
 
   public pageHandler(pageEvent: PageEvent): void {
-    this.store.dispatch(eventActions.load({page: pageEvent.pageIndex, size: pageEvent.pageSize, filter: this.filter, sort: undefined}));
+    this.store.dispatch(eventActions.load({page: pageEvent.pageIndex, size: pageEvent.pageSize, filter: this.filter, sort: this.sort}));
   }
 }

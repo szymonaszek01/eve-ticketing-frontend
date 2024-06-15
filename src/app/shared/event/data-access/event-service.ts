@@ -58,16 +58,10 @@ export class EventService extends BaseService<Event, EventFilter> {
   }
 
   getAll(page: number, size: number, filter: EventFilter | undefined, sort: string[] | undefined): Observable<Page<Event>> {
-    let sortArray = new HttpParams();
-    sort?.forEach(value => (sortArray = sortArray.append('sort', value)));
-    return this.http.get<Page<Event>>(environment.apiUrl + environment.eventApiUrl + '/all', {
-      params: {
-        page,
-        size,
-        ...filter,
-        ...sortArray
-      }
-    }).pipe(
+    let params = new HttpParams();
+    params = params.appendAll({page, size, ...filter});
+    sort?.forEach(value => (params = params.append('sort', value)));
+    return this.http.get<Page<Event>>(environment.apiUrl + environment.eventApiUrl + '/all', {params}).pipe(
       map(response => ({
         ...response,
         content: response.content.map(event => this.toCamelCase(event)).map(event => ({

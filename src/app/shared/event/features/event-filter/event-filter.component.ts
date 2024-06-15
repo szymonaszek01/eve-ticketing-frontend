@@ -11,7 +11,7 @@ import {
   MatCardTitleGroup
 } from '@angular/material/card';
 import { MatChip } from '@angular/material/chips';
-import { NgIf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -22,6 +22,10 @@ import { BaseState } from '../../../shared/models/base-state';
 import { Event } from '../../models/event';
 import { eventActions } from '../../data-access/event-actions';
 import { EventFilter } from '../../models/event-filter';
+import { MatIcon } from '@angular/material/icon';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EventSortComponent } from '../event-sort/event-sort.component';
+import { selectSort } from '../../data-access/event-reducers';
 
 @Component({
   selector: 'app-event-filter',
@@ -43,7 +47,9 @@ import { EventFilter } from '../../models/event-filter';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIcon,
+    NgForOf
   ],
   providers: [
     MatDatepickerModule
@@ -55,7 +61,9 @@ export class EventFilterComponent {
 
   public filterForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event> }>) {
+  public sort: string[];
+
+  constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event> }>, private dialog: MatDialog) {
     this.filterForm = this.formBuilder.group({
       name: [''],
       minUnitPrice: ['', [Validators.min(0)]],
@@ -65,6 +73,23 @@ export class EventFilterComponent {
       country: [''],
       address: ['']
     });
+    this.sort = [];
+  }
+
+  ngOnInit(): void {
+    this.store.select(selectSort).subscribe(sort => this.sort = (sort ?? []).map(sortValue => {
+      const splitSortValue: string[] = sortValue.split(',');
+      return `${splitSortValue[0].replace(new RegExp('_', 'g'), ' ').toUpperCase()},${splitSortValue[1]}`;
+    }));
+  }
+
+  public openDialog(): void {
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.maxWidth = '25rem';
+    this.dialog.open(EventSortComponent, dialogConfig);
   }
 
   protected submitForm(): void {

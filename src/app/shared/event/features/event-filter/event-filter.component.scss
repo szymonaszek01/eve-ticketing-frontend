@@ -11,6 +11,7 @@ mat-card-header {
   padding-top: $padding_small;
   padding-bottom: $padding_small;
   margin-bottom: 0.85rem;
+  align-items: center;
 }
 
 mat-card-title {
@@ -48,4 +49,31 @@ mat-card-actions {
 
 mat-form-field {
   min-width: 18rem;
+}
+
+.sort-button {
+  display: flex;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $secondary;
+  color: $secondary;
+  cursor: pointer;
+  background: transparent;
+}
+
+.sort-button:hover {
+  box-shadow: $box_shadow;
+}
+
+.sort-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: right;
+  margin-right: 1rem;
 }
