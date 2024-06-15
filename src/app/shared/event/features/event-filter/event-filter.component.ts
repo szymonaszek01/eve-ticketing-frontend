@@ -17,7 +17,6 @@ import { MatInput } from '@angular/material/input';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { selectPage, selectSize } from '../../data-access/event-reducers';
 import { Store } from '@ngrx/store';
 import { BaseState } from '../../../shared/models/base-state';
 import { Event } from '../../models/event';
@@ -56,10 +55,6 @@ export class EventFilterComponent {
 
   public filterForm: FormGroup;
 
-  private page: number;
-
-  private size: number;
-
   constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event> }>) {
     this.filterForm = this.formBuilder.group({
       name: [''],
@@ -70,13 +65,6 @@ export class EventFilterComponent {
       country: [''],
       address: ['']
     });
-    this.page = 0;
-    this.size = 0;
-  }
-
-  ngOnInit(): void {
-    this.store.select(selectPage).subscribe(page => this.page = page);
-    this.store.select(selectSize).subscribe(size => this.size = size);
   }
 
   protected submitForm(): void {
@@ -91,6 +79,6 @@ export class EventFilterComponent {
           : this.filterForm.value[valueKey];
       }
     }
-    this.store.dispatch(eventActions.load({page: 0, size: 10, filter: eventFilter as EventFilter}));
+    this.store.dispatch(eventActions.setFilter({filter: {...(eventFilter as EventFilter)}}));
   }
 }

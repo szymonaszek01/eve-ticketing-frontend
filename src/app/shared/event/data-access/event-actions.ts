@@ -7,7 +7,7 @@ import { EventFilter } from '../models/event-filter';
 export const eventActions = createActionGroup({
   source: 'Event',
   events: {
-    Load: props<{ page: number, size: number, filter: EventFilter | undefined }>(),
+    Load: props<{ page: number, size: number, filter: EventFilter | undefined, sort: string[] | undefined }>(),
     'Load success': props<{ page: Page<Event> }>(),
     Add: props<{ event: Event }>(),
     'Add success': props<{ event: Event }>(),
@@ -16,6 +16,8 @@ export const eventActions = createActionGroup({
     Remove: props<{ event: Event }>(),
     'Remove success': props<{ event: Event }>(),
     Clear: emptyProps(),
-    'Load error': props<{ error: ApiError }>()
+    'Load error': props<{ error: ApiError }>(),
+    'Set filter': props<{ filter: EventFilter }>(),
+    'Set sort': props<{ sort: string[] }>()
   }
 });

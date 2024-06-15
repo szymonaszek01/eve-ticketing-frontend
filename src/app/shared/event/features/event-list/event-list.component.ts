@@ -7,9 +7,11 @@ import { Event } from '../../models/event';
 import { BaseState } from '../../../shared/models/base-state';
 import { Store } from '@ngrx/store';
 import { eventActions } from '../../data-access/event-actions';
-import { selectList, selectPage, selectSize, selectTotalElements } from '../../data-access/event-reducers';
+import { selectFilter, selectList, selectPage, selectSize, selectTotalElements } from '../../data-access/event-reducers';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { EventFilterComponent } from '../event-filter/event-filter.component';
+import { EventFilter } from '../../models/event-filter';
+import { EmptyContentCardComponent } from '../../../shared/components/empty-content-card/empty-content-card.component';
 
 @Component({
   selector: 'app-event-list',
@@ -19,7 +21,8 @@ import { EventFilterComponent } from '../event-filter/event-filter.component';
     CommonModule,
     FormsModule,
     MatPaginator,
-    EventFilterComponent
+    EventFilterComponent,
+    EmptyContentCardComponent
   ],
   templateUrl: './event-list.component.html',
   styleUrl: './event-list.component.scss'
@@ -34,12 +37,15 @@ export class EventListComponent {
 
   public totalElements: number;
 
+  private filter: EventFilter | undefined;
+
   constructor(private eventService: EventService, private store: Store<{ event: BaseState<Event> }>) {
     this.eventList = [];
     this.page = 0;
     this.size = 0;
     this.totalElements = 0;
-    this.store.dispatch(eventActions.load({page: 0, size: 10, filter: undefined}));
+    this.filter = undefined;
+    this.store.dispatch(eventActions.load({page: 0, size: 10, filter: undefined, sort: undefined}));
   }
 
   ngOnInit(): void {
@@ -47,9 +53,13 @@ export class EventListComponent {
     this.store.select(selectPage).subscribe(page => this.page = page);
     this.store.select(selectSize).subscribe(size => this.size = size);
     this.store.select(selectTotalElements).subscribe(totalElements => this.totalElements = totalElements);
+    this.store.select(selectFilter).subscribe(filter => {
+      this.filter = filter;
+      this.store.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: undefined}));
+    });
   }
 
   public pageHandler(pageEvent: PageEvent): void {
-    this.store.dispatch(eventActions.load({page: pageEvent.pageIndex, size: pageEvent.pageSize, filter: undefined}));
+    this.store.dispatch(eventActions.load({page: pageEvent.pageIndex, size: pageEvent.pageSize, filter: this.filter, sort: undefined}));
   }
 }

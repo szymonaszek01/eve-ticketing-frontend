@@ -11,7 +11,7 @@ export const loadEventListEffect = createEffect(
     return actions$.pipe(
       ofType(eventActions.load),
       mergeMap(action =>
-        eventService.getAll(action.page, action.size, action.filter).pipe(
+        eventService.getAll(action.page, action.size, action.filter, action.sort).pipe(
           map(page => eventActions.loadSuccess({page})),
           catchError(error => of(eventActions.loadError({error})))
         )

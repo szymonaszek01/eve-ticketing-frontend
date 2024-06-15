@@ -6,6 +6,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { Page } from '../../shared/models/page';
 import { catchError, delay, map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +57,17 @@ export class EventService extends BaseService<Event, EventFilter> {
     return of<void>().pipe(delay(3000));
   }
 
-  getAll(page: number, size: number, filter: EventFilter | undefined): Observable<Page<Event>> {
-    return this.http.get<Page<Event>>(environment.apiUrl + environment.eventApiUrl + '/all', {params: {page, size, ...filter}}).pipe(
+  getAll(page: number, size: number, filter: EventFilter | undefined, sort: string[] | undefined): Observable<Page<Event>> {
+    let sortArray = new HttpParams();
+    sort?.forEach(value => (sortArray = sortArray.append('sort', value)));
+    return this.http.get<Page<Event>>(environment.apiUrl + environment.eventApiUrl + '/all', {
+      params: {
+        page,
+        size,
+        ...filter,
+        ...sortArray
+      }
+    }).pipe(
       map(response => ({
         ...response,
         content: response.content.map(event => this.toCamelCase(event)).map(event => ({

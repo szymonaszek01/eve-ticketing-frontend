@@ -3,6 +3,7 @@
   <div *ngFor="let event of this.eventList; index as i" class="w-full mt-large">
     <app-event-card [event]="this.event"></app-event-card>
   </div>
+  <app-empty-content-card *ngIf="this.totalElements < 1"></app-empty-content-card>
   <mat-paginator (page)="this.pageHandler($event)" class="mt-normal" [length]="this.totalElements"
                  [pageSize]="this.size" [pageSizeOptions]="[5, 10, 25]">
   </mat-paginator>

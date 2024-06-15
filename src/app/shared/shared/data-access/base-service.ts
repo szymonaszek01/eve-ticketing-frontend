@@ -41,7 +41,7 @@ export abstract class BaseService<T, U> {
     return newEntity;
   }
 
-  abstract getAll(page: number, size: number, filter: U | undefined): Observable<Page<T>>;
+  abstract getAll(page: number, size: number, filter: U | undefined, sort: string[] | undefined): Observable<Page<T>>;
 
   /**
    * @throws {ApiError}

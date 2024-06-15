@@ -1,4 +1,5 @@
 import { ApiError } from './api-error';
+import { EventFilter } from '../../event/models/event-filter';
 
 export interface BaseState<T> {
   list: T[];
@@ -12,4 +13,6 @@ export interface BaseState<T> {
   last: boolean;
   loading: boolean;
   error: ApiError | undefined;
+  filter: EventFilter | undefined;
+  sort: string[] | undefined;
 }

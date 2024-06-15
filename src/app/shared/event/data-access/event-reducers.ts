@@ -14,7 +14,9 @@ const initialState: BaseState<Event> = {
   totalElements: 0,
   last: true,
   loading: false,
-  error: undefined
+  error: undefined,
+  filter: undefined,
+  sort: undefined
 };
 
 const eventFeature = createFeature({
@@ -48,7 +50,9 @@ const eventFeature = createFeature({
       totalElements: 0,
       last: true
     })),
-    on(eventActions.loadError, (state, {error}) => ({...state, error, loading: false}))
+    on(eventActions.loadError, (state, {error}) => ({...state, error, loading: false})),
+    on(eventActions.setFilter, (state, {filter}) => ({...state, filter})),
+    on(eventActions.setSort, (state, {sort}) => ({...state, sort})),
   )
 });
 
@@ -65,5 +69,7 @@ export const {
   selectTotalElements,
   selectLast,
   selectLoading,
-  selectError
+  selectError,
+  selectFilter,
+  selectSort
 } = eventFeature;
