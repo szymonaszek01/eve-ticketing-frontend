@@ -1,45 +1,12 @@
 import { Observable } from 'rxjs';
 import { Page } from '../models/page';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Service } from './service';
 
 @Injectable({
   providedIn: 'root'
 })
-export abstract class BaseService<T, U> {
-
-  constructor(protected http: HttpClient) {
-  }
-
-  protected toCamelCase(entity: any): T {
-    const newEntity: any = {};
-    for (const key in entity) {
-      if (entity.hasOwnProperty(key)) {
-        const convertedKey = key.toLowerCase().replace(/([-_][a-z])/g, replacer => replacer
-          .toUpperCase()
-          .replace('-', '')
-          .replace('_', '')
-        );
-        newEntity[convertedKey] = entity[key];
-      }
-    }
-    return newEntity as T;
-  }
-
-  protected toSnakeCase(entity: any): any {
-    const newEntity: any = {};
-    for (const key in entity) {
-      if (entity.hasOwnProperty(key)) {
-        const convertedKey = key.toLowerCase().replace(/([-_][a-z])/g, replacer => replacer
-          .toUpperCase()
-          .replace('-', '')
-          .replace('_', '')
-        );
-        newEntity[convertedKey] = entity[key];
-      }
-    }
-    return newEntity;
-  }
+export abstract class BaseService<T, U> extends Service<T> {
 
   abstract getAll(page: number, size: number, filter: U | undefined, sort: string[] | undefined): Observable<Page<T>>;
 
