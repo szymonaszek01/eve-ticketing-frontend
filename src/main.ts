@@ -9,7 +9,9 @@ import { isDevMode } from '@angular/core';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { eventFeatureKey, eventReducer } from './app/shared/event/data-access/event-reducers';
 import * as eventEffects from './app/shared/event/data-access/event-effects';
+import * as authEffects from './app/public/auth/data-access/auth-effects';
 import { provideEffects } from '@ngrx/effects';
+import { authFeatureKey, authReducer } from './app/public/auth/data-access/auth-reducers';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -18,7 +20,9 @@ bootstrapApplication(AppComponent, {
     provideAnimationsAsync(),
     provideStore(),
     provideState(eventFeatureKey, eventReducer),
+    provideState(authFeatureKey, authReducer),
     provideEffects(eventEffects),
+    provideEffects(authEffects),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
