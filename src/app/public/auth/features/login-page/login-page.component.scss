@@ -1,0 +1,80 @@
+@import "src/styles";
+
+.flex-container {
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+}
+
+mat-card {
+  width: 25rem;
+  background: $dimWhite;
+  box-shadow: $box_shadow;
+  padding: 10px 20px;
+}
+
+mat-card-header {
+  margin-bottom: 0.85rem;
+  align-items: center;
+  padding: $padding_small 0;
+}
+
+mat-card-title {
+  color: $primary;
+  font-size: $font_size_large;
+  font-weight: 500;
+  word-break: break-word;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    text-align: center;
+  }
+}
+
+mat-card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+mat-card-actions {
+  margin-top: $margin_normal;
+  padding: $padding_small 0;
+}
+
+.mdc-card__actions {
+  @media screen and (max-width: $breakpoint_zero) {
+    justify-content: center;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+
+  input {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.register-button {
+  display: flex;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $secondary;
+  color: $secondary;
+  cursor: pointer;
+  background: transparent;
+}
+
+.register-button:hover {
+  box-shadow: $box_shadow;
+}

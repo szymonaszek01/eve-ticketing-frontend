@@ -23,7 +23,7 @@ export class PublicPageComponent {
       icon: 'house',
       label: 'Home'
     }, {
-      path: '/login',
+      path: '/auth/login',
       icon: 'login',
       label: 'Login'
     }, {
