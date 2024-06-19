@@ -14,11 +14,13 @@
       <mat-card-content>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input id="email" formControlName="email" type="text" autocomplete="email" matInput>
+          <input id="email" formControlName="email" type="email" autocomplete="email" matInput>
+          <mat-error>{{this.error('email')}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input id="password" formControlName="password" type="text" autocomplete="current-password" matInput>
+          <input id="password" formControlName="password" type="password" autocomplete="current-password" matInput>
+          <mat-error>{{this.error('password')}}</mat-error>
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>

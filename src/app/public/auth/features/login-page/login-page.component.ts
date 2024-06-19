@@ -7,12 +7,13 @@ import { CustomTabComponent } from '../../../../shared/shared/components/custom-
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle, MatCardTitleGroup } from '@angular/material/card';
 import { MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from '@angular/material/datepicker';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatError, MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { NgForOf } from '@angular/common';
 import { PublicPageComponent } from '../../../public-page.component';
 import { Router } from '@angular/router';
+import { renderError } from '../../../../shared/shared/util/constants';
 
 @Component({
   selector: 'app-login-page',
@@ -36,7 +37,8 @@ import { Router } from '@angular/router';
     MatLabel,
     MatSuffix,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatError
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
@@ -49,8 +51,12 @@ export class LoginPageComponent extends PublicPageComponent {
     super(router);
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern('/^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/')]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$')]],
     });
+  }
+
+  protected error(key: string): string {
+    return renderError(this.loginForm.controls[key], key);
   }
 
   protected submitForm(): void {
