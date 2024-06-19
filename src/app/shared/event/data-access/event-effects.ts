@@ -13,7 +13,7 @@ export const loadEventListEffect = createEffect(
       mergeMap(action =>
         eventService.getAll(action.page, action.size, action.filter, action.sort).pipe(
           map(page => eventActions.loadSuccess({page})),
-          catchError(error => of(eventActions.loadError({error})))
+          catchError(e => of(eventActions.loadError({error: e.error})))
         )
       )
     );
@@ -28,7 +28,7 @@ export const addEventEffect = createEffect(
       mergeMap(action =>
         eventService.create(action.event).pipe(
           map(event => eventActions.addSuccess({event})),
-          catchError(error => of(eventActions.loadError(error)))
+          catchError(e => of(eventActions.loadError({error: e.error})))
         )
       )
     );
@@ -43,7 +43,7 @@ export const updateEventEffect = createEffect(
       mergeMap(action =>
         eventService.update(action.event).pipe(
           map(event => eventActions.updateSuccess({event})),
-          catchError(error => of(eventActions.loadError(error)))
+          catchError(e => of(eventActions.loadError({error: e.error})))
         )
       )
     );
@@ -58,7 +58,7 @@ export const removeEventEffect = createEffect(
       mergeMap(action =>
         eventService.delete(action.event.id).pipe(
           map(() => eventActions.removeSuccess({event: action.event})),
-          catchError(error => of(eventActions.loadError(error)))
+          catchError(e => of(eventActions.loadError({error: e.error})))
         )
       )
     );

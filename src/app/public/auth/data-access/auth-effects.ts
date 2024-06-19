@@ -13,7 +13,7 @@ export const loginEffect = createEffect(
       mergeMap(action =>
         authService.login(action.loginReq).pipe(
           map(auth => authActions.loginSuccess({auth})),
-          catchError(error => of(authActions.loadError({error})))
+          catchError(e => of(authActions.loadError({error: e.error})))
         )
       )
     );
@@ -28,7 +28,7 @@ export const registerEffect = createEffect(
       mergeMap(action =>
         authService.register(action.registerReq).pipe(
           map(auth => authActions.registerSuccess({auth})),
-          catchError(error => of(authActions.loadError({error})))
+          catchError(e => of(authActions.loadError({error: e.error})))
         )
       )
     );
@@ -43,7 +43,7 @@ export const regenerateAuthTokenEffect = createEffect(
       mergeMap(action =>
         authService.regenerateAuthToken(action.regenerateAuthTokenReq).pipe(
           map(auth => authActions.regenerateAuthTokenSuccess({auth})),
-          catchError(error => of(authActions.loadError({error})))
+          catchError(e => of(authActions.loadError({error: e.error})))
         )
       )
     );

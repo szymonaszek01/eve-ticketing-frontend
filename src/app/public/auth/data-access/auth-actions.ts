@@ -15,6 +15,6 @@ export const authActions = createActionGroup({
     'Regenerate auth token': props<{ regenerateAuthTokenReq: RegenerateAuthTokenReq }>(),
     'Regenerate auth token success': props<{ auth: Auth }>(),
     Clear: emptyProps(),
-    'Load error': props<{ error: ApiError }>()
+    'Load error': props<{ error: ApiError | undefined }>()
   }
 });

@@ -1,4 +1,5 @@
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
+import { ApiError } from '../models/api-error';
 
 export function renderError(formControl: AbstractControl, key: string): string {
   if (formControl.hasError('required')) {
@@ -11,6 +12,10 @@ export function renderError(formControl: AbstractControl, key: string): string {
     return `Password should be at least 8 characters long, contain at least one digit, one uppercase letter, one lowercase letter and one special character`;
   }
   return '';
+}
+
+export function renderApiError(apiError: ApiError | undefined): string {
+  return apiError?.errors.map(error => error.description).join(', ') ?? '';
 }
 
 export function capitalize(value: string): string {

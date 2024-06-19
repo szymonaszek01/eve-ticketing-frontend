@@ -10,10 +10,12 @@ import { MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from '@angular
 import { MatError, MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { PublicPageComponent } from '../../../public-page.component';
 import { Router } from '@angular/router';
-import { renderError } from '../../../../shared/shared/util/constants';
+import { renderApiError, renderError } from '../../../../shared/shared/util/util';
+import { ApiError } from '../../../../shared/shared/models/api-error';
+import { selectAuth, selectError } from '../../data-access/auth-reducers';
 
 @Component({
   selector: 'app-login-page',
@@ -38,7 +40,8 @@ import { renderError } from '../../../../shared/shared/util/constants';
     MatSuffix,
     NgForOf,
     ReactiveFormsModule,
-    MatError
+    MatError,
+    NgIf,
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
@@ -47,21 +50,37 @@ export class LoginPageComponent extends PublicPageComponent {
 
   public loginForm: FormGroup;
 
+  public apiError: ApiError | undefined;
+
   constructor(protected router: Router, private formBuilder: FormBuilder, private store: Store<{ auth: AuthState }>) {
     super(router);
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$')]],
     });
+    this.apiError = undefined;
   }
 
-  protected error(key: string): string {
-    return renderError(this.loginForm.controls[key], key);
+  ngOnInit(): void {
+    this.store.select(selectError).subscribe(apiError => this.apiError = apiError);
+    this.store.select(selectAuth).subscribe(auth => {
+      // navigate to private page
+    });
+  }
+
+  protected error(key: string | undefined): string {
+    return key ? renderError(this.loginForm.controls[key], key) : renderApiError(this.apiError);
+  }
+
+  protected onInput(): void {
+    if (this.apiError) {
+      this.store.dispatch(authActions.loadError({error: undefined}));
+    }
   }
 
   protected submitForm(): void {
     if (!this.loginForm.valid) {
-      console.log('Not Valid');
+      return;
     }
     this.store.dispatch(authActions.login({loginReq: {...this.loginForm.value}}));
   }

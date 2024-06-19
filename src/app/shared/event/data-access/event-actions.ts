@@ -16,7 +16,7 @@ export const eventActions = createActionGroup({
     Remove: props<{ event: Event }>(),
     'Remove success': props<{ event: Event }>(),
     Clear: emptyProps(),
-    'Load error': props<{ error: ApiError }>(),
+    'Load error': props<{ error: ApiError | undefined}>(),
     'Set filter': props<{ filter: EventFilter }>(),
     'Set sort': props<{ sort: string[] }>()
   }
