@@ -95,7 +95,7 @@ mat-form-field {
   }
 }
 
-.register-button {
+.navigate-button {
   display: flex;
   padding: 0.5rem 0.8rem;
   border-radius: 4px;
@@ -107,7 +107,7 @@ mat-form-field {
   background: transparent;
 }
 
-.register-button:hover {
+.navigate-button:hover {
   box-shadow: $box_shadow;
 }
 
