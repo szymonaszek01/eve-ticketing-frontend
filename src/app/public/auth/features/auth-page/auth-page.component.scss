@@ -114,3 +114,24 @@ mat-form-field {
 .mat-mdc-form-field-bottom-align::before {
   content: none;
 }
+
+.register-content {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-between;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    justify-content: center;
+  }
+}
+
+.register-mat-card-width {
+  width: 100%;
+  max-width: 50rem;
+}
+
+.register-mat-form-field {
+  max-width: 14rem;
+  width: 100%;
+}

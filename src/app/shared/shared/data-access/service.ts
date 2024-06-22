@@ -28,11 +28,7 @@ export abstract class Service<T> {
     const newEntity: any = {};
     for (const key in entity) {
       if (entity.hasOwnProperty(key)) {
-        const convertedKey = key.toLowerCase().replace(/([-_][a-z])/g, replacer => replacer
-          .toUpperCase()
-          .replace('-', '')
-          .replace('_', '')
-        );
+        const convertedKey = key.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
         newEntity[convertedKey] = entity[key];
       }
     }

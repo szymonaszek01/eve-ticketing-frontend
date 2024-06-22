@@ -49,7 +49,9 @@ export class AuthPageComponent extends PublicPageComponent {
 
   public isLogin: boolean;
 
-  private commonAuthMatFormFieldList: AuthMatFormField[];
+  private readonly commonAuthMatFormFieldList: AuthMatFormField[];
+
+  private readonly passwordPattern: string = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$';
 
   constructor(protected router: Router, private store: Store<{ auth: AuthState }>, private formBuilder: FormBuilder) {
     super(router);
@@ -77,7 +79,7 @@ export class AuthPageComponent extends PublicPageComponent {
   ngOnInit(): void {
     this.store.select(selectError).subscribe(apiError => this.apiError = apiError);
     this.store.select(selectAuth).subscribe(auth => {
-      // navigate to private page
+      this.navigate('/private/dashboard');
     });
   }
 
@@ -91,7 +93,7 @@ export class AuthPageComponent extends PublicPageComponent {
       title: 'Login',
       formGroup: this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$')]],
+        password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
       }),
       authMatFormFieldList: [...this.commonAuthMatFormFieldList],
       differentAuthFormIcon: 'create',
@@ -101,9 +103,43 @@ export class AuthPageComponent extends PublicPageComponent {
       title: 'Register',
       formGroup: this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$')]],
+        password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
+        repeatedPassword: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
+        firstname: ['', [Validators.required]],
+        lastname: ['', [Validators.required]],
+        phoneNumber: ['', [Validators.required]]
       }),
-      authMatFormFieldList: [...this.commonAuthMatFormFieldList],
+      authMatFormFieldList: [
+        ...this.commonAuthMatFormFieldList, {
+          matLabel: 'Repeated password',
+          id: 'repeatedPassword',
+          formControlName: 'repeatedPassword',
+          type: 'password',
+          autoComplete: '',
+          key: 'repeatedPassword'
+        }, {
+          matLabel: 'Firstname',
+          id: 'firstname',
+          formControlName: 'firstname',
+          type: 'text',
+          autoComplete: 'firstname',
+          key: 'firstname'
+        }, {
+          matLabel: 'Lastname',
+          id: 'lastname',
+          formControlName: 'lastname',
+          type: 'text',
+          autoComplete: 'lastname',
+          key: 'lastname'
+        }, {
+          matLabel: 'Phone number',
+          id: 'phoneNumber',
+          formControlName: 'phoneNumber',
+          type: 'text',
+          autoComplete: '',
+          key: 'phoneNumber'
+        }
+      ],
       differentAuthFormIcon: 'login',
       differentAuthFormTitle: 'Login',
       action: (formGroup: FormGroup) => this.store.dispatch(authActions.register({registerReq: {...formGroup.value}}))
@@ -122,6 +158,11 @@ export class AuthPageComponent extends PublicPageComponent {
 
   protected onSubmit(): void {
     if (!this.authForm.formGroup.valid) {
+      return;
+    }
+    if (this.authForm.authMatFormFieldList.find(authMatFormField => authMatFormField.id === 'repeatedPassword')
+      && this.authForm.formGroup.value.password !== this.authForm.formGroup.value.repeatedPassword) {
+      this.authForm.formGroup.controls.repeatedPassword.setErrors({incorrectRepeatedPassword: true});
       return;
     }
     this.authForm.action(this.authForm.formGroup);
