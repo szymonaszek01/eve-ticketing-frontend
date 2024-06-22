@@ -12,7 +12,7 @@ export const privatePageGuard = () => {
     select(selectAuth),
     tap(auth => {
       if (!auth || !auth.authToken || !auth.refreshToken || !auth.role) {
-        router.navigateByUrl('/login').catch(error => console.log(error));
+        router.navigateByUrl('/auth').catch(error => console.log(error));
       }
     })
   );

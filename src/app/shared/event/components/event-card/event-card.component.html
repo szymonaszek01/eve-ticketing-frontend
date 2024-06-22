@@ -26,14 +26,16 @@
     </div>
     <div class="flex-container" id="custom-tab-list">
       <app-custom-tab [label]="'Sold out'" [value]="this.event.isSoldOut + ''"></app-custom-tab>
-      <app-custom-tab [label]="'Start at'" [value]="this.event.startAt.toLocaleDateString() + ' ' + this.event.startAt.toLocaleTimeString()"></app-custom-tab>
-      <app-custom-tab [label]="'End at'" [value]="this.event.endAt.toLocaleDateString() + ' ' + this.event.endAt.toLocaleTimeString()"></app-custom-tab>
+      <app-custom-tab [label]="'Start at'"
+                      [value]="this.event.startAt.toLocaleDateString() + ' ' + this.event.startAt.toLocaleTimeString()"></app-custom-tab>
+      <app-custom-tab [label]="'End at'"
+                      [value]="this.event.endAt.toLocaleDateString() + ' ' + this.event.endAt.toLocaleTimeString()"></app-custom-tab>
       <app-custom-tab [label]="'Max ticket amount'" [value]="this.event.maxTicketAmount + ''"></app-custom-tab>
       <app-custom-tab [label]="'Students discount'" [value]="this.event.studentsDiscount + '%'"></app-custom-tab>
       <app-custom-tab [label]="'Children discount'" [value]="this.event.childrenDiscount + '%'"></app-custom-tab>
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button>Create ticket</button>
+    <button mat-flat-button (click)="this.onClick(this.event, this.router)">Buy ticket</button>
   </mat-card-actions>
 </mat-card>

@@ -12,6 +12,9 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { EventFilterComponent } from '../event-filter/event-filter.component';
 import { EventFilter } from '../../models/event-filter';
 import { EmptyContentCardComponent } from '../../../shared/components/empty-content-card/empty-content-card.component';
+import { AuthState } from '../../../../public/auth/models/auth-state';
+import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-list',
@@ -41,32 +44,52 @@ export class EventListComponent {
 
   private sort: string[] | undefined;
 
-  constructor(private eventService: EventService, private store: Store<{ event: BaseState<Event> }>) {
+  private isLoggedIn: boolean;
+
+  constructor(
+    private eventService: EventService,
+    private eventStore: Store<{ event: BaseState<Event> }>,
+    private authStore: Store<{ auth: AuthState }>
+  ) {
     this.eventList = [];
     this.page = 0;
     this.size = 0;
     this.totalElements = 0;
     this.filter = undefined;
     this.sort = undefined;
-    this.store.dispatch(eventActions.load({page: 0, size: 10, filter: undefined, sort: undefined}));
+    this.isLoggedIn = false;
+    this.eventStore.dispatch(eventActions.load({page: 0, size: 10, filter: undefined, sort: undefined}));
   }
 
   ngOnInit(): void {
-    this.store.select(selectList).subscribe(eventList => this.eventList = eventList);
-    this.store.select(selectPage).subscribe(page => this.page = page);
-    this.store.select(selectSize).subscribe(size => this.size = size);
-    this.store.select(selectTotalElements).subscribe(totalElements => this.totalElements = totalElements);
-    this.store.select(selectFilter).subscribe(filter => {
+    this.eventStore.select(selectList).subscribe(eventList => this.eventList = eventList);
+    this.eventStore.select(selectPage).subscribe(page => this.page = page);
+    this.eventStore.select(selectSize).subscribe(size => this.size = size);
+    this.eventStore.select(selectTotalElements).subscribe(totalElements => this.totalElements = totalElements);
+    this.eventStore.select(selectFilter).subscribe(filter => {
       this.filter = filter;
-      this.store.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      this.eventStore.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
     });
-    this.store.select(selectSort).subscribe(sort => {
+    this.eventStore.select(selectSort).subscribe(sort => {
       this.sort = sort;
-      this.store.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      this.eventStore.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
     });
+    this.authStore.select(selectAuth).subscribe(auth => this.isLoggedIn = auth !== undefined);
   }
 
   public pageHandler(pageEvent: PageEvent): void {
-    this.store.dispatch(eventActions.load({page: pageEvent.pageIndex, size: pageEvent.pageSize, filter: this.filter, sort: this.sort}));
+    this.eventStore.dispatch(eventActions.load({
+      page: pageEvent.pageIndex,
+      size: pageEvent.pageSize,
+      filter: this.filter,
+      sort: this.sort
+    }));
+  }
+
+  protected onClick(event: Event, router: Router): void {
+    console.log(event);
+    if (!this.isLoggedIn) {
+      router.navigateByUrl('/auth').catch(error => console.log(error));
+    }
   }
 }

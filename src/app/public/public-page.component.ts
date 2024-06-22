@@ -21,19 +21,23 @@ export class PublicPageComponent {
     this.routeList = [{
       path: '/',
       icon: 'house',
-      label: 'Home'
+      label: 'Home',
+      action: undefined
     }, {
       path: '/auth',
       icon: 'login',
-      label: 'Login'
+      label: 'Login',
+      action: undefined
     }, {
       path: '/contact',
       icon: 'mail',
-      label: 'Contact'
+      label: 'Contact',
+      action: undefined
     }, {
       path: '/settings',
       icon: 'settings',
-      label: 'Settings'
+      label: 'Settings',
+      action: undefined
     }];
   }
 

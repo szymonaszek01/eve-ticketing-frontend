@@ -7,7 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { SideBarRoute } from '../../models/side-bar-route';
 import { FooterComponent } from '../footer/footer.component';
 
@@ -42,7 +42,7 @@ export class SideBarComponent {
 
   protected isCollapsed: boolean;
 
-  constructor(private observer: BreakpointObserver) {
+  constructor(private observer: BreakpointObserver, private router: Router) {
     this.routeList = [];
     this.isMobile = true;
     this.isCollapsed = false;
@@ -62,6 +62,15 @@ export class SideBarComponent {
     } else {
       this.sidenav.open().catch(error => console.log(error));
       this.isCollapsed = !this.isCollapsed;
+    }
+  }
+
+  protected onClick(sideBarRoute: SideBarRoute): void {
+    if (sideBarRoute.action) {
+      sideBarRoute.action();
+    }
+    if (sideBarRoute.path) {
+      this.router.navigateByUrl(sideBarRoute.path).catch(error => console.log(error));
     }
   }
 }
