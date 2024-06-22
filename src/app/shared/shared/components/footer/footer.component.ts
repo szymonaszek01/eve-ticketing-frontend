@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgForOf, NgOptimizedImage } from '@angular/common';
-import { RoundedIconComponent } from '../../../../shared/shared/components/rounded-icon/rounded-icon.component';
+import { RoundedIconComponent } from '../rounded-icon/rounded-icon.component';
 import { MatListItem } from '@angular/material/list';
 import { SideBarRoute } from '../../models/side-bar-route';
 

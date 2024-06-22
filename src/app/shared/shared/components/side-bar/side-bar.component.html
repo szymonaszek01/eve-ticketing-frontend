@@ -2,7 +2,7 @@
   <button *ngIf="this.isMobile" mat-icon-button aria-label="Menu icon" (click)="this.toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
-  <img ngSrc="assets/logo.png" alt="logo" height="382" width="1500">
+  <img ngSrc="../../../../../assets/logo.png" alt="logo" height="382" width="1500">
 </mat-toolbar>
 <mat-sidenav-container autosize="true">
   <mat-sidenav [ngClass]="!this.isCollapsed ? 'expanded' : ''" [mode]="'side'" [opened]="!this.isMobile">
