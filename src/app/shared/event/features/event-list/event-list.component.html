@@ -1,5 +1,5 @@
 <div class="w-full items-center">
-  <app-event-filter class="mt-normal"></app-event-filter>
+  <app-event-filter class="mt-large"></app-event-filter>
   <div *ngFor="let event of this.eventList; index as i" class="w-full mt-large">
     <app-event-card [event]="this.event" [onClick]="this.onClick"></app-event-card>
   </div>

@@ -2,8 +2,9 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { BaseState } from '../../shared/models/base-state';
 import { eventActions } from './event-actions';
 import { Event } from '../models/event';
+import { EventFilter } from '../models/event-filter';
 
-const initialState: BaseState<Event> = {
+const initialState: BaseState<Event, EventFilter> = {
   list: [],
   lastAdded: undefined,
   lastUpdated: undefined,

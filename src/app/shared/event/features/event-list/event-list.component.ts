@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { EventCardComponent } from '../../components/event-card/event-card.component';
-import { EventService } from '../../data-access/event-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Event } from '../../models/event';
@@ -46,11 +45,7 @@ export class EventListComponent {
 
   private isLoggedIn: boolean;
 
-  constructor(
-    private eventService: EventService,
-    private eventStore: Store<{ event: BaseState<Event> }>,
-    private authStore: Store<{ auth: AuthState }>
-  ) {
+  constructor(private eventStore: Store<{ event: BaseState<Event, EventFilter> }>, private authStore: Store<{ auth: AuthState }>) {
     this.eventList = [];
     this.page = 0;
     this.size = 0;

@@ -63,7 +63,7 @@ export class EventFilterComponent {
 
   public sort: string[];
 
-  constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event> }>, private dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event, EventFilter> }>, private dialog: MatDialog) {
     this.filterForm = this.formBuilder.group({
       name: [''],
       minUnitPrice: ['', [Validators.min(0)]],

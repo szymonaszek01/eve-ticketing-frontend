@@ -15,6 +15,7 @@ import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-
 import { NgForOf } from '@angular/common';
 import { ToggleButton } from '../../../shared/models/toggle-button';
 import { eventActions } from '../../data-access/event-actions';
+import { EventFilter } from '../../models/event-filter';
 
 @Component({
   selector: 'app-event-sort',
@@ -62,7 +63,7 @@ export class EventSortComponent {
 
   public toggleButtonList: ToggleButton[];
 
-  constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event> }>) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event, EventFilter> }>) {
     this.sortForm = this.formBuilder.group({
       id: [''],
       start_at: [''],

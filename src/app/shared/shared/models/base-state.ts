@@ -1,7 +1,6 @@
 import { ApiError } from './api-error';
-import { EventFilter } from '../../event/models/event-filter';
 
-export interface BaseState<T> {
+export interface BaseState<T, U> {
   list: T[];
   lastAdded: T | undefined;
   lastUpdated: T | undefined;
@@ -13,6 +12,6 @@ export interface BaseState<T> {
   last: boolean;
   loading: boolean;
   error: ApiError | undefined;
-  filter: EventFilter | undefined;
+  filter: U | undefined;
   sort: string[] | undefined;
 }
