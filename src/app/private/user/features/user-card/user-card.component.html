@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>
+        User
+      </mat-card-title>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="flex-container" id="custom-tab-list">
+      <app-custom-tab [label]="'Id'" [value]="this.user.id + ''"></app-custom-tab>
+      <app-custom-tab [label]="'Email'" [value]="this.user.email"></app-custom-tab>
+      <app-custom-tab [label]="'Created at'"
+                      [value]="this.user.createdAt.toLocaleDateString() + ' ' + this.user.createdAt.toLocaleTimeString()"></app-custom-tab>
+      <app-custom-tab [label]="'Firstname'" [value]="this.user.firstname"></app-custom-tab>
+      <app-custom-tab [label]="'Lastname'" [value]="this.user.lastname"></app-custom-tab>
+      <app-custom-tab [label]="'Phone number'" [value]="this.user.phoneNumber"></app-custom-tab>
+      <app-custom-tab [label]="'Role'" [value]="this.user.role"></app-custom-tab>
+    </div>
+  </mat-card-content>
+</mat-card>

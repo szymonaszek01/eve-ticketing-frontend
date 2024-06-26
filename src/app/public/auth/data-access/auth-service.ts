@@ -14,11 +14,14 @@ import { environment } from '../../../../environments/environment';
 export class AuthService extends Service<Auth> {
 
   login(loginReq: LoginReq): Observable<Auth> {
-    return this.http.post<Auth>(
+    return this.http.post(
       environment.apiUrl + environment.authUserApiUrl + '/login',
       {...this.toSnakeCase(loginReq)}
     ).pipe(
-      map(response => this.toCamelCase(response)),
+      map(response => {
+        const auth: Auth = this.toCamelCase(response);
+        return {...auth, createdAt: new Date(auth.createdAt)};
+      }),
       catchError(error => throwError(error))
     );
   }
@@ -28,7 +31,10 @@ export class AuthService extends Service<Auth> {
       environment.apiUrl + environment.authUserApiUrl + '/register',
       {...this.toSnakeCase(registerReq)}
     ).pipe(
-      map(response => this.toCamelCase(response)),
+      map(response => {
+        const auth: Auth = this.toCamelCase(response);
+        return {...auth, createdAt: new Date(auth.createdAt)};
+      }),
       catchError(error => throwError(error))
     );
   }
@@ -38,7 +44,10 @@ export class AuthService extends Service<Auth> {
       environment.apiUrl + environment.authUserApiUrl + '/refresh-token',
       {...this.toSnakeCase(regenerateAuthTokenReq)}
     ).pipe(
-      map(response => this.toCamelCase(response)),
+      map(response => {
+        const auth: Auth = this.toCamelCase(response);
+        return {...auth, createdAt: new Date(auth.createdAt)};
+      }),
       catchError(error => throwError(error))
     );
   }
