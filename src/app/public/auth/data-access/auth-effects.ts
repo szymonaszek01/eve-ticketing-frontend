@@ -20,6 +20,21 @@ export const loginEffect = createEffect(
   }, {functional: true}
 );
 
+export const loginViaGoogleEffect = createEffect(
+  (actions$ = inject(Actions),
+   authService = inject(AuthService)) => {
+    return actions$.pipe(
+      ofType(authActions.loginViaGoogle),
+      mergeMap(action => {
+        return authService.loginViaGoogle(action.loginViaGoogleReq).pipe(
+          map(auth => authActions.loginSuccess({auth})),
+          catchError(e => of(authActions.loadError({error: e.error})))
+        );
+      })
+    );
+  }, {functional: true}
+);
+
 export const registerEffect = createEffect(
   (actions$ = inject(Actions),
    authService = inject(AuthService)) => {

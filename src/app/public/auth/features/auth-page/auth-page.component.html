@@ -11,10 +11,6 @@
             <span>{{this.error(undefined)}}</span>
           </mat-error>
         </mat-card-title-group>
-        <button class="navigate-button" type="button" title="{{this.authForm.differentAuthFormTitle}}"
-                (click)="this.updateAuthForm()">
-          <mat-icon>{{this.authForm.differentAuthFormIcon}}</mat-icon>
-        </button>
       </mat-card-header>
       <mat-card-content class="{{!this.isLogin ? 'register-content' : ''}}">
         <mat-form-field appearance="outline" *ngFor="let authMatFormField of this.authForm.authMatFormFieldList"
@@ -22,12 +18,30 @@
           <mat-label>{{authMatFormField.matLabel}}</mat-label>
           <input (input)="this.onInput()" id="{{authMatFormField.id}}"
                  formControlName="{{authMatFormField.formControlName}}" type="{{authMatFormField.type}}"
-                 autocomplete="{{authMatFormField.autoComplete ?? ''}}" matInput>
+                 autocomplete="{{this.rememberMe ? (authMatFormField.autoComplete ?? '') : ''}}" matInput>
           <mat-error>{{this.error(authMatFormField.key)}}</mat-error>
         </mat-form-field>
+        <div class="flex-span-row" *ngIf="this.isLogin">
+          <div class="remember-me-container">
+            <input type="checkbox" (change)="this.rememberMe = !this.rememberMe">
+            <span class="navigate-body">
+              Remember me
+            </span>
+          </div>
+          <span *ngIf="this.isLogin" class="navigate-body">
+            Forgot password?
+          </span>
+        </div>
       </mat-card-content>
-      <mat-card-actions>
-        <button type="submit" mat-flat-button>{{this.authForm.title}}</button>
+      <mat-card-actions class="{{this.isLogin ? 'margin-top-small' : ''}}">
+        <button type="button" class="w-full google-sign-in-button" *ngIf="this.isLogin" (click)="this.navigate('/auth/code/google')">Sign in with Google</button>
+        <button type="submit" mat-flat-button class="w-full">{{this.authForm.title}}</button>
+        <span class="navigate-title">
+          {{this.isLogin ? 'Don\'t have an account?' : 'Do you have an account?'}}
+          <span (click)="this.updateAuthForm()" class="navigate-body">
+            {{this.authForm.differentAuthFormTitle}}
+          </span>
+        </span>
       </mat-card-actions>
     </form>
   </mat-card>

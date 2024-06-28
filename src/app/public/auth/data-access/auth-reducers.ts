@@ -14,6 +14,8 @@ const authFeature = createFeature({
   reducer: createReducer(initialState,
     on(authActions.login, state => ({...state, loading: true})),
     on(authActions.loginSuccess, (state, {auth}) => ({...state, loading: false, auth, firstLogin: false})),
+    on(authActions.loginViaGoogle, state => ({...state, loading: true})),
+    on(authActions.loginViaGoogleSuccess, (state, {auth}) => ({...state, loading: false, auth, firstLogin: false})),
     on(authActions.register, state => ({...state, loading: true})),
     on(authActions.registerSuccess, (state, {auth}) => ({...state, loading: false, auth, firstLogin: true})),
     on(authActions.regenerateAuthToken, (state) => ({...state, loading: true})),

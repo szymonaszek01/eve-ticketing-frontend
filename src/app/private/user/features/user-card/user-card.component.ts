@@ -11,11 +11,12 @@ import {
   MatCardTitleGroup
 } from '@angular/material/card';
 import { MatChip } from '@angular/material/chips';
-import { NgIf } from '@angular/common';
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import { User } from '../../../../shared/shared/models/user';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../../../../public/auth/models/auth-state';
 import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-card',
@@ -31,7 +32,9 @@ import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
     MatCardTitle,
     MatCardTitleGroup,
     MatChip,
-    NgIf
+    NgIf,
+    NgOptimizedImage,
+    MatIcon
   ],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss'
@@ -48,7 +51,8 @@ export class UserCardComponent {
       firstname: '',
       lastname: '',
       phoneNumber: '',
-      role: ''
+      role: '',
+      image: ''
     };
   }
 

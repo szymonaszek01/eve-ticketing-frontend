@@ -18,7 +18,7 @@ export function renderError(formControl: AbstractControl, key: string): string {
 }
 
 export function renderApiError(apiError: ApiError | undefined): string {
-  return apiError?.errors.map(error => error.description).join(', ') ?? '';
+  return apiError?.errors?.map(error => error.description).join(', ') ?? 'An error occurred';
 }
 
 export function capitalize(value: string): string {

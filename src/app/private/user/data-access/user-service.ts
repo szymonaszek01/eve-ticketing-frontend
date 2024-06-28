@@ -20,7 +20,8 @@ export class UserService extends BaseService<User, UserFilter> {
     firstname: 'Jan',
     lastname: 'Kowalski',
     phoneNumber: '+48800800800',
-    role: 'USER'
+    role: 'USER',
+    image: ''
   }];
 
   create(user: User): Observable<User> {

@@ -7,4 +7,5 @@ export interface User extends BaseEntity {
   lastname: string;
   phoneNumber: string;
   role: string;
+  image: string;
 }

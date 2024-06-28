@@ -36,7 +36,7 @@ import { AuthMatFormField } from '../../models/auth-mat-form-field';
     MatLabel,
     NgIf,
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
   ],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.scss'
@@ -49,14 +49,21 @@ export class AuthPageComponent extends PublicPageComponent {
 
   public isLogin: boolean;
 
+  public rememberMe: boolean;
+
   private readonly commonAuthMatFormFieldList: AuthMatFormField[];
 
   private readonly passwordPattern: string = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$';
 
-  constructor(protected router: Router, private store: Store<{ auth: AuthState }>, private formBuilder: FormBuilder) {
+  constructor(
+    protected router: Router,
+    private store: Store<{ auth: AuthState }>,
+    private formBuilder: FormBuilder
+  ) {
     super(router);
     this.apiError = undefined;
     this.isLogin = true;
+    this.rememberMe = false;
     this.commonAuthMatFormFieldList = [{
       matLabel: 'Email',
       id: 'email',

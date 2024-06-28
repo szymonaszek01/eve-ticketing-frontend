@@ -7,6 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 import { RegisterReq } from '../models/register-req';
 import { RegenerateAuthTokenReq } from '../models/regenerate-auth-token-req';
 import { environment } from '../../../../environments/environment';
+import { LoginViaGoogleReq } from '../models/login-via-google-req';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,19 @@ export class AuthService extends Service<Auth> {
     return this.http.post(
       environment.apiUrl + environment.authUserApiUrl + '/login',
       {...this.toSnakeCase(loginReq)}
+    ).pipe(
+      map(response => {
+        const auth: Auth = this.toCamelCase(response);
+        return {...auth, createdAt: new Date(auth.createdAt)};
+      }),
+      catchError(error => throwError(error))
+    );
+  }
+
+  loginViaGoogle(loginViaGoogleReq: LoginViaGoogleReq): Observable<Auth> {
+    return this.http.post(
+      environment.apiUrl + environment.authUserApiUrl + '/login/code/google',
+      {...this.toSnakeCase(loginViaGoogleReq)}
     ).pipe(
       map(response => {
         const auth: Auth = this.toCamelCase(response);

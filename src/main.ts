@@ -15,6 +15,7 @@ import { provideEffects } from '@ngrx/effects';
 import { authFeatureKey, authReducer } from './app/public/auth/data-access/auth-reducers';
 import { authInterceptor } from './app/shared/shared/interceptors/auth-interceptor';
 import { userFeatureKey, userReducer } from './app/private/user/data-access/user-reducers';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -34,7 +35,8 @@ bootstrapApplication(AppComponent, {
       autoPause: true,
       trace: false,
       traceLimit: 75,
-    })
+    }),
+    provideOAuthClient()
   ]
 })
   .catch(error => console.error(error));
