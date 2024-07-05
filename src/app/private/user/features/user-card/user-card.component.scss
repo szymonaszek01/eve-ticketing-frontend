@@ -55,12 +55,10 @@ img {
   height: 250px;
   border: $primary solid 1px;
   border-radius: 4px;
-  margin-right: 4rem;
 
   @media screen and (max-width: $breakpoint_zero) {
     width: 50%;
     height: auto;
-    margin-right: 0;
   }
 }
 
@@ -117,6 +115,18 @@ app-custom-tab {
   @media screen and (max-width: $breakpoint_zero) {
     width: 50%;
     height: auto;
+    margin-right: 0;
+  }
+}
+
+.w-auto {
+  width: auto;
+  margin-right: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media screen and (max-width: $breakpoint_zero) {
     margin-right: 0;
   }
 }

@@ -4,6 +4,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService } from './auth-service';
 import { authActions } from './auth-actions';
+import { FirebaseService } from '../../../shared/firebase/data-access/firebase-service';
 
 export const loginEffect = createEffect(
   (actions$ = inject(Actions),
@@ -58,6 +59,21 @@ export const regenerateAuthTokenEffect = createEffect(
       mergeMap(action =>
         authService.regenerateAuthToken(action.regenerateAuthTokenReq).pipe(
           map(auth => authActions.regenerateAuthTokenSuccess({auth})),
+          catchError(e => of(authActions.loadError({error: e.error})))
+        )
+      )
+    );
+  }, {functional: true}
+);
+
+export const uploadAuthImageEffect = createEffect(
+  (actions$ = inject(Actions),
+   firebaseService = inject(FirebaseService)) => {
+    return actions$.pipe(
+      ofType(authActions.uploadAuthImage),
+      mergeMap(action =>
+        firebaseService.upload(action.file, action.entity, action.field).pipe(
+          map(firebaseRes => authActions.uploadAuthImageSuccess({firebaseRes})),
           catchError(e => of(authActions.loadError({error: e.error})))
         )
       )

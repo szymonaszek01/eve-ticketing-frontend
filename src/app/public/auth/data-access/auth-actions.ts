@@ -5,6 +5,7 @@ import { LoginReq } from '../models/login-req';
 import { RegisterReq } from '../models/register-req';
 import { RegenerateAuthTokenReq } from '../models/regenerate-auth-token-req';
 import { LoginViaGoogleReq } from '../models/login-via-google-req';
+import { FirebaseRes } from '../../../shared/firebase/models/firebase-res';
 
 export const authActions = createActionGroup({
   source: 'Auth',
@@ -17,6 +18,8 @@ export const authActions = createActionGroup({
     'Register success': props<{ auth: Auth }>(),
     'Regenerate auth token': props<{ regenerateAuthTokenReq: RegenerateAuthTokenReq }>(),
     'Regenerate auth token success': props<{ auth: Auth }>(),
+    'Upload auth image': props<{ file: File, entity: string, field: string }>(),
+    'Upload auth image success': props<{ firebaseRes: FirebaseRes }>(),
     Clear: emptyProps(),
     'Load error': props<{ error: ApiError | undefined }>()
   }

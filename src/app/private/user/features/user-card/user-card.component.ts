@@ -17,6 +17,8 @@ import { Store } from '@ngrx/store';
 import { AuthState } from '../../../../public/auth/models/auth-state';
 import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
 import { MatIcon } from '@angular/material/icon';
+import { ImageUploaderComponent } from '../../../../shared/firebase/features/image-uploader/image-uploader.component';
+import { authActions } from '../../../../public/auth/data-access/auth-actions';
 
 @Component({
   selector: 'app-user-card',
@@ -34,7 +36,8 @@ import { MatIcon } from '@angular/material/icon';
     MatChip,
     NgIf,
     NgOptimizedImage,
-    MatIcon
+    MatIcon,
+    ImageUploaderComponent
   ],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss'
@@ -43,7 +46,7 @@ export class UserCardComponent {
 
   protected user: User;
 
-  constructor(private store: Store<{ auth: AuthState }>) {
+  constructor(protected store: Store<{ auth: AuthState }>) {
     this.user = {
       id: 0,
       email: '',
@@ -58,5 +61,9 @@ export class UserCardComponent {
 
   ngOnInit(): void {
     this.store.select(selectAuth).subscribe(auth => this.user = auth ? {...auth} : this.user);
+  }
+
+  protected onImageUploadClick(file: File): void {
+    this.store.dispatch(authActions.uploadAuthImage({file, entity: 'auth-user', field: 'image'}));
   }
 }

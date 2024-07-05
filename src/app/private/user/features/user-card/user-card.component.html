@@ -1,9 +1,12 @@
 <mat-card>
   <mat-card-content>
-    <img *ngIf="this.user.image" ngSrc="{{this.user.image}}" alt="user-image" width="100" height="100">
-    <div *ngIf="!this.user.image" class="empty-image">
-      <mat-icon>do_not_disturb</mat-icon>
-      <p>Empty image</p>
+    <div class="w-auto">
+      <img *ngIf="this.user.image" ngSrc="{{this.user.image}}" alt="user-image" width="100" height="100">
+      <div *ngIf="!this.user.image" class="empty-image">
+        <mat-icon>do_not_disturb</mat-icon>
+        <p>Empty image</p>
+      </div>
+      <app-image-uploader [store]="this.store" [action]="this.onImageUploadClick"></app-image-uploader>
     </div>
     <div class="flex-container" id="custom-tab-list">
       <app-custom-tab [label]="'Id'" [value]="this.user.id + ''"></app-custom-tab>
