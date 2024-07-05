@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../public/auth/models/auth-state';
 import { authActions } from '../public/auth/data-access/auth-actions';
+import { removeFromLocalStorage } from '../shared/shared/util/util';
 
 @Component({
   selector: 'app-private-page',
@@ -29,7 +30,10 @@ export class PrivatePageComponent {
       path: '/auth',
       icon: 'logout',
       label: 'Logout',
-      action: () => this.store.dispatch(authActions.clear())
+      action: () => {
+        this.store.dispatch(authActions.clear());
+        removeFromLocalStorage('auth');
+      }
     }];
   }
 

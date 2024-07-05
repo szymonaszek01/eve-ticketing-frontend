@@ -13,9 +13,10 @@ import { Store } from '@ngrx/store';
 import { AuthState } from '../../models/auth-state';
 import { AuthForm } from '../../models/auth-form';
 import { selectAuth, selectError } from '../../data-access/auth-reducers';
-import { renderApiError, renderError } from '../../../../shared/shared/util/util';
+import { renderApiError, renderError, setInLocalStorage } from '../../../../shared/shared/util/util';
 import { authActions } from '../../data-access/auth-actions';
 import { AuthMatFormField } from '../../models/auth-mat-form-field';
+import { Auth } from '../../models/auth';
 
 @Component({
   selector: 'app-auth-page',
@@ -86,6 +87,7 @@ export class AuthPageComponent extends PublicPageComponent {
   ngOnInit(): void {
     this.store.select(selectError).subscribe(apiError => this.apiError = apiError);
     this.store.select(selectAuth).subscribe(auth => {
+      setInLocalStorage<Auth>(auth, 'auth');
       this.navigate('/private/dashboard');
     });
   }

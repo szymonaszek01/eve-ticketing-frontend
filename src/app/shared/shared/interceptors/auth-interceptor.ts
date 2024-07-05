@@ -7,6 +7,7 @@ import { catchError, switchMap, take } from 'rxjs/operators';
 import { selectAuth } from '../../../public/auth/data-access/auth-reducers';
 import { authActions } from '../../../public/auth/data-access/auth-actions';
 import { Auth } from '../../../public/auth/models/auth';
+import { removeFromLocalStorage } from '../util/util';
 
 const setAuthTokenInHeaders = (auth: Auth | undefined, req: HttpRequest<any>): HttpRequest<any> => {
   if (auth && auth.authToken && auth.refreshToken) {
@@ -40,9 +41,10 @@ export const authInterceptor = (req: HttpRequest<any>, next: HttpHandlerFn): Obs
       return next(setAuthTokenInHeaders(auth, req)).pipe(
         catchError(error => {
           if (error.status !== 401) {
-            store.dispatch(authActions.clear());
             return throwError(error);
           }
+          store.dispatch(authActions.clear());
+          removeFromLocalStorage('auth');
           regenerateAuthToken(auth);
           return store.select(selectAuth).pipe(
             take(1),

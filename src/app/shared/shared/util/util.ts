@@ -28,3 +28,23 @@ export function capitalize(value: string): string {
 export function space(key: string): string {
   return key.replace(/[A-Z-_\\&](?=[a-z0-9]+)|[A-Z-_\\&]+(?![a-z0-9])/g, ' $&').trim();
 }
+
+export function setInLocalStorage<T>(state: T | undefined, key: string): void {
+  if (state) {
+    localStorage.setItem(key, JSON.stringify(state));
+  }
+}
+
+export function getFromLocalStorage<T>(key: string, dateKeyList: string[]): T | undefined {
+  const stateAsString: string | null = localStorage.getItem(key);
+  let state: any | undefined = stateAsString ? JSON.parse(stateAsString) : undefined;
+  if (state) {
+    dateKeyList.forEach(dateKey => state = {...state, [dateKey]: new Date(state[dateKey])});
+    return state as T;
+  }
+  return undefined;
+}
+
+export function removeFromLocalStorage(key: string): void {
+  localStorage.removeItem(key);
+}
