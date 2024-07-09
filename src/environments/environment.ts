@@ -7,7 +7,10 @@ export const environment = {
   apiUrl: 'http://localhost:8080/api/v1',
   eventApiUrl: '/event',
   authUserApiUrl: '/auth-user',
-  firebaseApiUrl: '/firebase'
+  firebaseApiUrl: '/firebase',
+  ticketApiUrl: '/ticket',
+  googleClientId: '',
+  googleClientSecret: ''
 };
 
 /*

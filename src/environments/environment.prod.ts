@@ -4,4 +4,7 @@ export const environment = {
   eventApiUrl: '/event',
   authUserApiUrl: '/auth-user',
   firebaseApiUrl: '/firebase',
+  ticketApiUrl: '/ticket',
+  googleClientId: '',
+  googleClientSecret: ''
 };
