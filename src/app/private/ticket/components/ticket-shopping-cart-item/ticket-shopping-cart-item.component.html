@@ -1,0 +1,17 @@
+<div class="w-full flex-container ticket-shopping-cart">
+  <app-custom-tab [label]="'No.'" [value]="this.index + ''"></app-custom-tab>
+  <app-custom-tab [label]="'Code'" [value]="this.ticket.code"></app-custom-tab>
+  <app-custom-tab [label]="'Created at'"
+                  [value]="this.ticket.createdAt.toLocaleDateString() + ' ' + this.ticket.createdAt.toLocaleTimeString()"></app-custom-tab>
+  <app-custom-tab [label]="'Firstname'" [value]="this.ticket.firstname"></app-custom-tab>
+  <app-custom-tab [label]="'Lastname'" [value]="this.ticket.lastname"></app-custom-tab>
+  <app-custom-tab [label]="'Paid'"
+                  [value]="this.ticket.paid + ''"></app-custom-tab>
+  <div class="cost">
+    {{this.ticket.cost}}$
+  </div>
+  <div class="action">
+    <mat-icon>edit</mat-icon>
+    <mat-icon>remove_shopping_cart</mat-icon>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+@import "src/styles";
+
+.ticket-shopping-cart {
+  padding: 10px;
+  border-radius: 4px;
+  border: $secondary solid 1px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-icon {
+  color: #00dddd;
+  border-radius: 4px;
+  background: $dimWhite;
+  box-shadow: $box_shadow;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.cost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 55px;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 5px;
+  border-radius: 4px;
+  border: $secondary solid 1px;
+}
+
+.action {
+  display: flex;
+  width: auto;
+  gap: 0.5rem;
+}

@@ -29,6 +29,22 @@ mat-icon {
   color: $secondary;
 }
 
+.shopping-cart-checkout {
+  position: absolute;
+  left: 35px;
+  top: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: limegreen;
+  color: white;
+  font-size: 0.65rem;
+  border-radius: 100%;
+  width: 19px;
+  height: 19px;
+}
+
 mat-sidenav-container {
   height: 100%;
 }
