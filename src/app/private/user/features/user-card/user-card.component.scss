@@ -27,6 +27,7 @@ mat-card-actions {
 
   @media screen and (max-width: $breakpoint_zero) {
     width: 100%;
+    justify-content: center;
 
     button {
       width: 100%;
@@ -112,7 +113,7 @@ app-custom-tab {
   justify-content: center;
 
   @media screen and (max-width: $breakpoint_zero) {
-    width: 100%;
+    width: 90%;
     height: 150px;
   }
 }
@@ -126,5 +127,6 @@ app-custom-tab {
 
   @media screen and (max-width: $breakpoint_zero) {
     margin-right: 0;
+    align-items: center;
   }
 }
