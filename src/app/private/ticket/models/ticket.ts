@@ -1,16 +1,10 @@
-import { BaseEntity } from '../../../shared/shared/models/base-entity';
+import { Seat } from '../../seat/models/seat';
+import { User } from '../../../shared/shared/models/user';
+import { Event } from '../../../shared/event/models/event';
+import { TicketBase } from './ticket-base';
 
-export interface Ticket extends BaseEntity {
-  code: string;
-  createdAt: Date;
-  firstname: string;
-  lastname: string;
-  phoneNumber: string;
-  cost: number;
-  isAdult: boolean;
-  isStudent: boolean;
-  eventId: number;
-  seatId: number;
-  userId: number;
-  paid: boolean;
+export interface Ticket extends TicketBase {
+  event: Event;
+  seat: Seat | undefined;
+  user: User;
 }
