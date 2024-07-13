@@ -18,12 +18,12 @@ export abstract class BaseService<T, U> extends Service<T> {
   /**
    * @throws {ApiError}
    */
-  abstract create(event: T): Observable<T>;
+  abstract create(event: any): Observable<T>;
 
   /**
    * @throws {ApiError}
    */
-  abstract update(event: T): Observable<T>;
+  abstract update(event: any): Observable<T>;
 
   /**
    * @throws {ApiError}
