@@ -10,6 +10,8 @@ export const ticketActions = createActionGroup({
   events: {
     Load: props<{ page: number, size: number, filter: TicketFilter | undefined, sort: string[] | undefined }>(),
     'Load success': props<{ page: Page<Ticket> }>(),
+    'Load reserved': props<{ page: number, size: number, filter: TicketFilter | undefined, sort: string[] | undefined }>(),
+    'Load reserved success': props<{ page: Page<Ticket> }>(),
     Add: props<{ ticketReq: TicketReq }>(),
     'Add success': props<{ ticket: Ticket }>(),
     Update: props<{ ticket: Ticket }>(),

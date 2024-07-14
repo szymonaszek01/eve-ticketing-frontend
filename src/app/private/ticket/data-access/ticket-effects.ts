@@ -20,6 +20,21 @@ export const loadTicketListEffect = createEffect(
   }, {functional: true}
 );
 
+export const loadReservedTicketListEffect = createEffect(
+  (actions$ = inject(Actions),
+   ticketService = inject(TicketService)) => {
+    return actions$.pipe(
+      ofType(ticketActions.loadReserved),
+      mergeMap(action =>
+        ticketService.getAll(action.page, action.size, action.filter, action.sort).pipe(
+          map(page => ticketActions.loadReservedSuccess({page})),
+          catchError(e => of(ticketActions.loadError({error: e.error})))
+        )
+      )
+    );
+  }, {functional: true}
+);
+
 export const addTicketEffect = createEffect(
   (actions$ = inject(Actions),
    ticketService = inject(TicketService)) => {

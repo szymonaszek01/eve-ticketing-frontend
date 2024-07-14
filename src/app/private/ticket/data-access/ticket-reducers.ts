@@ -3,9 +3,11 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { Ticket } from '../models/ticket';
 import { TicketFilter } from '../models/ticket-filter';
 import { ticketActions } from './ticket-actions';
+import { TicketState } from '../models/ticket-state';
 
-const initialState: BaseState<Ticket, TicketFilter> = {
+const initialState: TicketState = {
   list: [],
+  reservedList: [],
   lastAdded: undefined,
   lastUpdated: undefined,
   lastRemoved: undefined,
@@ -34,6 +36,11 @@ const ticketFeature = createFeature({
       last: page.last,
       loading: false
     })),
+    on(ticketActions.loadReserved, state => ({...state, loading: true})),
+    on(ticketActions.loadReservedSuccess, (state, {page}) => ({
+      ...state,
+      reservedList: page.content
+    })),
     on(ticketActions.add, state => ({...state, loading: true})),
     on(ticketActions.addSuccess, (state, {ticket}) => ({...state, lastAdded: ticket, loading: false})),
     on(ticketActions.update, state => ({...state, loading: true})),
@@ -61,6 +68,7 @@ export const {
   name: ticketFeatureKey,
   reducer: ticketReducer,
   selectList,
+  selectReservedList,
   selectLastAdded,
   selectLastUpdated,
   selectLastRemoved,
