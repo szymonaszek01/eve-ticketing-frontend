@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import { SideBarRoute } from '../../models/side-bar-route';
 import { FooterComponent } from '../footer/footer.component';
+import { Store } from '@ngrx/store';
+import { TicketState } from '../../../../private/ticket/models/ticket-state';
+import { selectReservedList } from '../../../../private/ticket/data-access/ticket-reducers';
 
 @Component({
   selector: 'app-side-bar',
@@ -42,17 +45,21 @@ export class SideBarComponent {
 
   protected isCollapsed: boolean;
 
-  constructor(private observer: BreakpointObserver, private router: Router) {
+  protected ticketReservedListCapacity: number;
+
+  constructor(private observer: BreakpointObserver, private router: Router, protected ticketStore: Store<{ ticket: TicketState }>) {
     this.routeList = [];
     this.isMobile = true;
     this.isCollapsed = false;
     this.observer = observer;
+    this.ticketReservedListCapacity = 0;
   }
 
   ngOnInit(): void {
     this.observer.observe(['(max-width: 768px)']).subscribe((screenSize) => {
       this.isMobile = screenSize.matches;
     });
+    this.ticketStore.select(selectReservedList).subscribe(reservedList => this.ticketReservedListCapacity = reservedList.length);
   }
 
   protected toggleMenu(): void {
@@ -66,7 +73,7 @@ export class SideBarComponent {
   }
 
   protected onClick(sideBarRoute: SideBarRoute): void {
-    if (sideBarRoute.action) {
+    if (sideBarRoute.action && !(sideBarRoute.label.toLowerCase() === 'shopping cart' && this.ticketReservedListCapacity < 1)) {
       sideBarRoute.action();
     }
     if (sideBarRoute.path) {
