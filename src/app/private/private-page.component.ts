@@ -38,7 +38,7 @@ export class PrivatePageComponent {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.width = '100%';
-        dialogConfig.maxWidth = '60rem';
+        dialogConfig.maxWidth = '75rem';
         this.dialog.open(TicketShoppingCartComponent, dialogConfig);
       }
     }, {

@@ -3,6 +3,7 @@ import { Ticket } from '../../models/ticket';
 import { CustomTabComponent } from '../../../../shared/shared/components/custom-tab/custom-tab.component';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-shopping-cart-item',
@@ -10,7 +11,8 @@ import { MatIcon } from '@angular/material/icon';
   imports: [
     CustomTabComponent,
     MatButton,
-    MatIcon
+    MatIcon,
+    NgIf
   ],
   templateUrl: './ticket-shopping-cart-item.component.html',
   styleUrl: './ticket-shopping-cart-item.component.scss'
@@ -18,27 +20,11 @@ import { MatIcon } from '@angular/material/icon';
 export class TicketShoppingCartItemComponent {
 
   @Input()
-  protected index: number;
+  public index: number | undefined;
 
   @Input()
-  protected ticket: Ticket;
+  public ticket: Ticket | undefined;
 
   constructor() {
-    this.index = 1;
-    this.ticket = {
-      id: 1,
-      code: 'fkfjjf1-f123x-ADADD-34as',
-      createdAt: new Date(),
-      firstname: 'John',
-      lastname: 'Kane',
-      phoneNumber: '+48791000123',
-      cost: 200,
-      isAdult: true,
-      isStudent: false,
-      eventId: 1,
-      seatId: 1,
-      userId: 1,
-      paid: false
-    };
   }
 }
