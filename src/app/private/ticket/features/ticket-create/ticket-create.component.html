@@ -1,0 +1,39 @@
+<form [formGroup]="this.formGroup" (ngSubmit)="this.onSubmit()">
+  <span mat-dialog-title>Buy ticket<br><span class="event-name">"{{this.event?.name}}"</span></span>
+  <mat-error *ngIf="this.apiError">
+    <mat-icon>info</mat-icon>
+    <span>{{this.error(undefined)}}</span>
+  </mat-error>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Firstname</mat-label>
+      <input id="firstname" formControlName="firstname" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Lastname</mat-label>
+      <input id="lastname" formControlName="lastname" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Phone number</mat-label>
+      <input id="phoneNumber" formControlName="phoneNumber" type="text" matInput>
+    </mat-form-field>
+    <div class="sort-row">
+      <span>Adult</span>
+      <mat-button-toggle-group name="isAdult" id="isAdult" formControlName="isAdult">
+        <mat-button-toggle value="true">YES</mat-button-toggle>
+        <mat-button-toggle value="false">NO</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="sort-row">
+      <span>Student</span>
+      <mat-button-toggle-group name="isStudent" id="isStudent" formControlName="isStudent">
+        <mat-button-toggle value="true">YES</mat-button-toggle>
+        <mat-button-toggle value="false">NO</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </mat-dialog-content>
+  <div class="dialog-actions">
+    <button type="submit" mat-flat-button disabled="{{!this.formGroup.valid}}">Submit</button>
+    <button type="button" mat-flat-button mat-dialog-close>Close</button>
+  </div>
+</form>
