@@ -11,11 +11,13 @@ import { eventFeatureKey, eventReducer } from './app/shared/event/data-access/ev
 import * as eventEffects from './app/shared/event/data-access/event-effects';
 import * as authEffects from './app/public/auth/data-access/auth-effects';
 import * as userEffects from './app/private/user/data-access/user-effects';
+import * as ticketEffects from './app/private/ticket/data-access/ticket-effects';
 import { provideEffects } from '@ngrx/effects';
 import { authFeatureKey, authReducer } from './app/public/auth/data-access/auth-reducers';
 import { authInterceptor } from './app/shared/shared/interceptors/auth-interceptor';
 import { userFeatureKey, userReducer } from './app/private/user/data-access/user-reducers';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
+import { ticketFeatureKey, ticketReducer } from './app/private/ticket/data-access/ticket-reducers';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -26,9 +28,11 @@ bootstrapApplication(AppComponent, {
     provideState(eventFeatureKey, eventReducer),
     provideState(authFeatureKey, authReducer),
     provideState(userFeatureKey, userReducer),
+    provideState(ticketFeatureKey, ticketReducer),
     provideEffects(eventEffects),
     provideEffects(authEffects),
     provideEffects(userEffects),
+    provideEffects(ticketEffects),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

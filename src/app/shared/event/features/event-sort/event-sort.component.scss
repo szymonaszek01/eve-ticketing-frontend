@@ -11,10 +11,7 @@ span {
   font-size: $font_size_large;
   font-weight: 500;
   word-break: break-word;
-
-  @media screen and (max-width: $breakpoint_zero) {
-    text-align: center;
-  }
+  text-align: center;
 }
 
 mat-dialog-content {
@@ -31,19 +28,14 @@ mat-dialog-content {
 
 .dialog-actions {
   display: flex;
-  flex-direction: row;
-  justify-content: left;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   padding: 20px 24px;
 
-  @media screen and (max-width: $breakpoint_zero) {
-    flex-direction: column;
-    justify-content: center;
-
-    button {
-      width: 100%;
-    }
+  button {
+    width: 100%;
   }
 }
 

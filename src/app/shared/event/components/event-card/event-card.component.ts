@@ -1,12 +1,11 @@
 import { Event } from '../../models/event';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatChip } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CustomTabComponent } from '../../../shared/components/custom-tab/custom-tab.component';
 import { MatButton } from '@angular/material/button';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-card',
@@ -18,13 +17,14 @@ import { Router } from '@angular/router';
 export class EventCardComponent {
 
   @Input()
-  public event: Event;
+  public event: Event | undefined;
 
-  @Input()
-  public onClick: (event: Event, router: Router) => void;
+  @Output() buyTicket = new EventEmitter<Event>();
 
-  constructor(protected router: Router) {
-    this.event = {} as Event;
-    this.onClick = (event: Event, router: Router) => console.log(event, router);
+  constructor() {
+  }
+
+  protected onClick(): void {
+    this.buyTicket.emit(this.event);
   }
 }

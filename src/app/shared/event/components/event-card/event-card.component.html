@@ -1,27 +1,27 @@
-<mat-card>
+<mat-card *ngIf="this.event">
   <mat-card-header>
     <mat-card-title-group>
       <mat-card-title>
-        {{this.event.name}}
+        {{ this.event.name }}
       </mat-card-title>
       <mat-card-subtitle>
-        {{this.event.description}}
+        {{ this.event.description }}
       </mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-content>
     <div class="flex-container">
       <mat-chip>
-        {{this.event.country}}
+        {{ this.event.country }}
       </mat-chip>
       <mat-chip>
-        {{this.event.address}}
+        {{ this.event.address }}
       </mat-chip>
       <mat-chip *ngIf="this.event.localizationName">
-        {{this.event.localizationName}}
+        {{ this.event.localizationName }}
       </mat-chip>
       <mat-chip>
-        {{this.event.unitPrice + this.event.currency}}
+        {{ this.event.unitPrice + this.event.currency }}
       </mat-chip>
     </div>
     <div class="flex-container" id="custom-tab-list">
@@ -36,6 +36,6 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button (click)="this.onClick(this.event, this.router)">Buy ticket</button>
+    <button mat-flat-button (click)="this.onClick()">Buy ticket</button>
   </mat-card-actions>
 </mat-card>

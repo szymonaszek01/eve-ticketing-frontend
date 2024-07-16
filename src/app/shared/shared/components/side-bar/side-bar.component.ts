@@ -59,7 +59,7 @@ export class SideBarComponent {
     this.observer.observe(['(max-width: 768px)']).subscribe((screenSize) => {
       this.isMobile = screenSize.matches;
     });
-    this.ticketStore.select(selectReservedList).subscribe(reservedList => this.ticketReservedListCapacity = reservedList.length);
+    this.ticketStore.select(selectReservedList).subscribe(reservedList => this.ticketReservedListCapacity = reservedList ? reservedList.length : 0);
   }
 
   protected toggleMenu(): void {

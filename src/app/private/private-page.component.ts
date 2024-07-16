@@ -7,7 +7,6 @@ import { AuthState } from '../public/auth/models/auth-state';
 import { authActions } from '../public/auth/data-access/auth-actions';
 import { removeFromLocalStorage } from '../shared/shared/util/util';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { EventSortComponent } from '../shared/event/features/event-sort/event-sort.component';
 import { TicketShoppingCartComponent } from './ticket/features/ticket-shopping-cart/ticket-shopping-cart.component';
 
 @Component({
