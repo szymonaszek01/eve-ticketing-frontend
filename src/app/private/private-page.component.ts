@@ -8,6 +8,7 @@ import { authActions } from '../public/auth/data-access/auth-actions';
 import { removeFromLocalStorage } from '../shared/shared/util/util';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TicketShoppingCartComponent } from './ticket/features/ticket-shopping-cart/ticket-shopping-cart.component';
+import { TicketState } from './ticket/models/ticket-state';
 
 @Component({
   selector: 'app-private-page',
@@ -21,7 +22,11 @@ export class PrivatePageComponent {
 
   protected routeList: SideBarRoute[];
 
-  constructor(protected router: Router, private store: Store<{ auth: AuthState }>, private dialog: MatDialog) {
+  constructor(protected router: Router,
+              protected authStore: Store<{ auth: AuthState }>,
+              protected ticketStore: Store<{ ticket: TicketState }>,
+              private dialog: MatDialog
+  ) {
     this.router = router;
     this.routeList = [{
       path: '/private/dashboard',
@@ -37,7 +42,7 @@ export class PrivatePageComponent {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.width = '100%';
-        dialogConfig.maxWidth = '75rem';
+        dialogConfig.maxWidth = '80rem';
         this.dialog.open(TicketShoppingCartComponent, dialogConfig);
       }
     }, {
@@ -45,7 +50,7 @@ export class PrivatePageComponent {
       icon: 'logout',
       label: 'Logout',
       action: () => {
-        this.store.dispatch(authActions.clear());
+        this.authStore.dispatch(authActions.clear());
         removeFromLocalStorage('auth');
       }
     }];

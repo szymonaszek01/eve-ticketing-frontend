@@ -96,7 +96,7 @@ export class EventListComponent {
       dialogConfig.autoFocus = true;
       dialogConfig.width = '100%';
       dialogConfig.maxWidth = '25rem';
-      dialogConfig.data = event;
+      dialogConfig.data = {event};
       this.dialog.open(TicketCreateComponent, dialogConfig);
     }
   }

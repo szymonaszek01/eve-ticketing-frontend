@@ -59,7 +59,12 @@ export class SideBarComponent {
     this.observer.observe(['(max-width: 768px)']).subscribe((screenSize) => {
       this.isMobile = screenSize.matches;
     });
-    this.ticketStore.select(selectReservedList).subscribe(reservedList => this.ticketReservedListCapacity = reservedList ? reservedList.length : 0);
+    this.ticketStore.select(selectReservedList)
+      .subscribe(reservedList => {
+        console.log('side-bar.component');
+        console.log(reservedList);
+        this.ticketReservedListCapacity = reservedList ? reservedList.length : 0;
+      });
   }
 
   protected toggleMenu(): void {
