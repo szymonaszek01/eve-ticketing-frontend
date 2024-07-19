@@ -4,6 +4,9 @@ import { CustomTabComponent } from '../../../../shared/shared/components/custom-
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { TicketCreateComponent } from '../../features/ticket-create/ticket-create.component';
+import { TimerComponent } from '../../../../shared/shared/features/timer/timer.component';
 
 @Component({
   selector: 'app-ticket-shopping-cart-item',
@@ -12,7 +15,8 @@ import { NgIf } from '@angular/common';
     CustomTabComponent,
     MatButton,
     MatIcon,
-    NgIf
+    NgIf,
+    TimerComponent
   ],
   templateUrl: './ticket-shopping-cart-item.component.html',
   styleUrl: './ticket-shopping-cart-item.component.scss'
@@ -25,6 +29,16 @@ export class TicketShoppingCartItemComponent {
   @Input()
   public ticket: Ticket | undefined;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
+  }
+
+  protected updateTicket(): void {
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.maxWidth = '25rem';
+    dialogConfig.data = {ticket: this.ticket};
+    this.dialog.open(TicketCreateComponent, dialogConfig);
   }
 }
