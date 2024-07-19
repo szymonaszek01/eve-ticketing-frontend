@@ -14,7 +14,7 @@ export const ticketActions = createActionGroup({
     'Load reserved success': props<{ page: Page<Ticket> }>(),
     Add: props<{ ticketReq: TicketReq }>(),
     'Add success': props<{ ticket: Ticket }>(),
-    Update: props<{ ticket: Ticket }>(),
+    Update: props<{ values: any }>(),
     'Update success': props<{ ticket: Ticket }>(),
     Remove: props<{ ticket: Ticket }>(),
     'Remove success': props<{ ticket: Ticket }>(),

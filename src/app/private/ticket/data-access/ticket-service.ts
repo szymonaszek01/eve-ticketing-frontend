@@ -1,7 +1,7 @@
 import { BaseService } from '../../../shared/shared/data-access/base-service';
 import { Ticket } from '../models/ticket';
 import { TicketFilter } from '../models/ticket-filter';
-import { forkJoin, Observable, throwError } from 'rxjs';
+import { forkJoin, Observable, of, throwError } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { Page } from '../../../shared/shared/models/page';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -9,10 +9,10 @@ import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { TicketReq } from '../models/ticket-req';
 import { TicketRes } from '../models/ticket-res';
-import { TicketBase } from '../models/ticket-base';
 import { EventService } from '../../../shared/event/data-access/event-service';
 import { SeatService } from '../../seat/data-access/seat-service';
-import { UserService } from '../../user/data-access/user-service';
+import { Seat } from '../../seat/models/seat';
+import { Event } from '../../../shared/event/models/event';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,6 @@ export class TicketService extends BaseService<Ticket, TicketFilter> {
     protected http: HttpClient,
     private eventService: EventService,
     private seatService: SeatService,
-    private userService: UserService,
   ) {
     super(http);
   }
@@ -70,10 +69,10 @@ export class TicketService extends BaseService<Ticket, TicketFilter> {
     );
   }
 
-  update(ticket: Ticket): Observable<Ticket> {
+  update(values: any): Observable<Ticket> {
     return this.http.put<TicketRes>(
       environment.apiUrl + environment.ticketApiUrl + '/update',
-      {...(ticket as TicketBase), eventId: ticket.event.id, seatId: ticket.seat?.id, userId: ticket.user.id}
+      this.toSnakeCase({...values})
     ).pipe(
       switchMap((response) => this.mapTicketResToTicket(response)),
       catchError((error) => throwError(error))
@@ -81,18 +80,19 @@ export class TicketService extends BaseService<Ticket, TicketFilter> {
   }
 
   private mapTicketResToTicket(response: any): Observable<Ticket> {
-    return forkJoin({
-      event: this.eventService.getOne(response.event_id),
-      seat: this.seatService.getOne(response.seat_id),
-      user: this.userService.getOne(response.user_id),
-    }).pipe(
-      map(({event, seat, user}) => {
+    const eventObservable = this.eventService.getOne(response.event_id);
+    const seatObservable = response.seat_id ? this.seatService.getOne(response.seat_id) : of(undefined);
+    return forkJoin({event: eventObservable, seat: seatObservable}).pipe(
+      map(({event, seat}) => {
         delete response.event_id;
         delete response.seat_id;
-        delete response.user_id;
-        return this.toCamelCase({...response, event, seat, user});
+        return this.mergeResponse(response, event, seat);
       }),
       map(ticket => ({...ticket, createdAt: new Date(ticket.createdAt)}))
     );
+  }
+
+  private mergeResponse(response: any, event: Event, seat: Seat | undefined): Ticket {
+    return this.toCamelCase({...response, event, seat});
   }
 }

@@ -56,7 +56,7 @@ export const updateTicketEffect = createEffect(
     return actions$.pipe(
       ofType(ticketActions.update),
       mergeMap(action =>
-        ticketService.update(action.ticket).pipe(
+        ticketService.update(action.values).pipe(
           map(ticket => ticketActions.updateSuccess({ticket})),
           catchError(e => of(ticketActions.loadError({error: e.error})))
         )
