@@ -1,5 +1,6 @@
 import { AbstractControl } from '@angular/forms';
 import { ApiError } from '../models/api-error';
+import { TicketFilter } from '../../../private/ticket/models/ticket-filter';
 
 export function renderError(formControl: AbstractControl, key: string): string {
   if (formControl.hasError('required')) {
@@ -47,4 +48,23 @@ export function getFromLocalStorage<T>(key: string, dateKeyList: string[]): T | 
 
 export function removeFromLocalStorage(key: string): void {
   localStorage.removeItem(key);
+}
+
+export const paymentTimeInMillis: number = 1000 * 60 * 10;
+
+export function ticketReservedFilter(userId: number): TicketFilter {
+  return {
+    code: '',
+    firstname: '',
+    lastname: '',
+    phoneNumber: '',
+    minCost: '',
+    maxCost: '',
+    minDate: new Date(Math.floor(new Date().getTime() / paymentTimeInMillis) * paymentTimeInMillis).toISOString(),
+    maxDate: '',
+    eventId: 0,
+    userId,
+    seatId: 0,
+    paid: false
+  };
 }
