@@ -48,14 +48,17 @@ export class TicketService extends BaseService<Ticket, TicketFilter> {
     params = params.appendAll({page, size, ...filter});
     sort?.forEach(value => (params = params.append('sort', value)));
     return this.http.get<Page<TicketRes>>(environment.apiUrl + environment.ticketApiUrl + '/all', {params}).pipe(
-      mergeMap((response) =>
-        forkJoin(response.content.map((ticketRes) => this.mapTicketResToTicket(ticketRes))).pipe(
+      mergeMap((response) => {
+        if (response.content.length < 1) {
+          return of({...response, content: []});
+        }
+        return forkJoin(response.content.map((ticketRes) => this.mapTicketResToTicket(ticketRes))).pipe(
           map((tickets) => ({
             ...response,
             content: tickets,
           }))
-        )
-      ),
+        );
+      }),
       catchError((error) => throwError(error))
     );
   }

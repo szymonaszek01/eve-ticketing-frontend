@@ -1,7 +1,4 @@
-import { BaseState } from '../../../shared/shared/models/base-state';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { Ticket } from '../models/ticket';
-import { TicketFilter } from '../models/ticket-filter';
 import { ticketActions } from './ticket-actions';
 import { TicketState } from '../models/ticket-state';
 

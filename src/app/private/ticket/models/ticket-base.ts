@@ -10,4 +10,5 @@ export interface TicketBase extends BaseEntity {
   isAdult: boolean;
   isStudent: boolean;
   paid: boolean;
+  userId: number;
 }
