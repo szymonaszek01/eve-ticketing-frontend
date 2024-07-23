@@ -1,0 +1,20 @@
+<form (ngSubmit)="this.onSubmit()">
+  <span mat-dialog-title>Delete ticket</span>
+  <mat-error *ngIf="this.apiError">
+    <mat-icon>info</mat-icon>
+    <span>{{this.error()}}</span>
+  </mat-error>
+  <mat-dialog-content *ngIf="this.ticket">
+    <span>
+      Are you sure you want to delete this ticket?<br><br>
+      <strong>Code:</strong> {{this.ticket.code}}<br>
+      <strong>Event name:</strong> {{this.ticket.event.name}}<br>
+      <strong>Cost:</strong> {{this.ticket.cost + this.ticket.event.currency}}<br><br>
+      This action cannot be undone. Do you wish to proceed?
+    </span>
+  </mat-dialog-content>
+  <div class="dialog-actions">
+    <button type="submit" mat-flat-button>Submit</button>
+    <button type="button" mat-flat-button mat-dialog-close>Close</button>
+  </div>
+</form>

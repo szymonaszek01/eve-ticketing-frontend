@@ -7,6 +7,7 @@ import { NgIf } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TicketCreateComponent } from '../../features/ticket-create/ticket-create.component';
 import { TimerComponent } from '../../../../shared/shared/features/timer/timer.component';
+import { TicketDeleteComponent } from '../../features/ticket-delete/ticket-delete.component';
 
 @Component({
   selector: 'app-ticket-shopping-cart-item',
@@ -40,5 +41,15 @@ export class TicketShoppingCartItemComponent {
     dialogConfig.maxWidth = '25rem';
     dialogConfig.data = {ticket: this.ticket};
     this.dialog.open(TicketCreateComponent, dialogConfig);
+  }
+
+  protected deleteTicket(): void {
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.maxWidth = '25rem';
+    dialogConfig.data = {ticket: this.ticket};
+    this.dialog.open(TicketDeleteComponent, dialogConfig);
   }
 }

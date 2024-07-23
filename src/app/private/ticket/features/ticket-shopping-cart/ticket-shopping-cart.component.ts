@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
-import { MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { NgForOf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TicketShoppingCartItemComponent } from '../../components/ticket-shopping-cart-item/ticket-shopping-cart-item.component';
@@ -32,15 +32,16 @@ export class TicketShoppingCartComponent {
 
   protected ticketReservedList: Ticket[];
 
-  constructor(protected ticketStore: Store<{ ticket: TicketState }>) {
+  constructor(protected ticketStore: Store<{ ticket: TicketState }>, private dialogRef: MatDialogRef<TicketShoppingCartItemComponent>) {
     this.ticketReservedList = [];
   }
 
   ngOnInit(): void {
     this.ticketStore.select(selectReservedList).subscribe(reservedList => {
-      console.log('ticket-shopping-cart.component');
-      console.log(reservedList);
       this.ticketReservedList = reservedList;
+      if (reservedList.length < 1) {
+        this.dialogRef.close();
+      }
     });
   }
 
