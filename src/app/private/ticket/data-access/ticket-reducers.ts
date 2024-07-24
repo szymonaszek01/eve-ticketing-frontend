@@ -45,7 +45,9 @@ const ticketFeature = createFeature({
     on(ticketActions.remove, state => ({...state, loading: true})),
     on(ticketActions.removeSuccess, (state, {ticket}) => ({...state, lastRemoved: ticket, loading: false})),
     on(ticketActions.clear, state => ({
-      ...state, list: [],
+      ...state,
+      list: [],
+      reservedList: [],
       lastAdded: undefined,
       lastUpdated: undefined,
       lastRemoved: undefined,
@@ -55,6 +57,8 @@ const ticketFeature = createFeature({
       totalElements: 0,
       last: true
     })),
+    on(ticketActions.pay, state => ({...state, loading: true})),
+    on(ticketActions.paySuccess, state => ({...state, reservedList: []})),
     on(ticketActions.loadError, (state, {error}) => ({...state, error, loading: false})),
     on(ticketActions.setFilter, (state, {filter}) => ({...state, filter})),
     on(ticketActions.setSort, (state, {sort}) => ({...state, sort})),

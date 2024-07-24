@@ -82,6 +82,15 @@ export class TicketService extends BaseService<Ticket, TicketFilter> {
     );
   }
 
+  pay(values: any): Observable<void> {
+    return this.http.put<void>(
+      environment.apiUrl + environment.ticketApiUrl + '/pay',
+      this.toSnakeCase({...values})
+    ).pipe(
+      catchError((error) => throwError(error))
+    );
+  }
+
   private mapTicketResToTicket(response: any): Observable<Ticket> {
     const eventObservable = this.eventService.getOne(response.event_id);
     const seatObservable = response.seat_id ? this.seatService.getOne(response.seat_id) : of(undefined);

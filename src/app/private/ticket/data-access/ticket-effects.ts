@@ -89,3 +89,18 @@ export const clearTicketListEffect = createEffect(
     );
   }, {functional: true}
 );
+
+export const payTicketListEffect = createEffect(
+  (actions$ = inject(Actions),
+   ticketService = inject(TicketService)) => {
+    return actions$.pipe(
+      ofType(ticketActions.pay),
+      mergeMap(action =>
+        ticketService.pay(action.values).pipe(
+          map(() => ticketActions.paySuccess()),
+          catchError(e => of(ticketActions.loadError({error: e.error})))
+        )
+      )
+    );
+  }, {functional: true}
+);

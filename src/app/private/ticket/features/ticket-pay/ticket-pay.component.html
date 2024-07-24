@@ -1,0 +1,17 @@
+<form (ngSubmit)="this.onSubmit()">
+  <span mat-dialog-title>Pay for tickets</span>
+  <mat-error *ngIf="this.apiError">
+    <mat-icon>info</mat-icon>
+    <span>{{ this.error() }}</span>
+  </mat-error>
+  <mat-dialog-content *ngIf="this.ticketReservedList.length > 0">
+    <span>
+      Are you sure you want to buy tickets?<br>
+      <strong>This action cannot be undone. Do you wish to proceed?</strong>
+    </span>
+  </mat-dialog-content>
+  <div class="dialog-actions">
+    <button type="submit" mat-flat-button>Submit</button>
+    <button type="button" mat-flat-button mat-dialog-close>Close</button>
+  </div>
+</form>

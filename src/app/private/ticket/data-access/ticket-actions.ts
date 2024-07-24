@@ -18,6 +18,8 @@ export const ticketActions = createActionGroup({
     'Update success': props<{ ticket: Ticket }>(),
     Remove: props<{ ticket: Ticket }>(),
     'Remove success': props<{ ticket: Ticket }>(),
+    Pay: props<{ values: any }>(),
+    'Pay success': emptyProps(),
     Clear: emptyProps(),
     'Load error': props<{ error: ApiError | undefined }>(),
     'Set filter': props<{ filter: TicketFilter }>(),
