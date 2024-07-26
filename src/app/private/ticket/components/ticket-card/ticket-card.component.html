@@ -1,0 +1,43 @@
+<mat-card *ngIf="this.ticket && this.index">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>
+        {{ this.ticket.event.name }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ this.ticket.code }}
+      </mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="flex-container">
+      <mat-chip>
+        {{ this.ticket.cost + this.ticket.event.currency }}
+      </mat-chip>
+      <mat-chip>
+        {{ this.ticket.event.country }}
+      </mat-chip>
+      <mat-chip>
+        {{ this.ticket.event.address }}
+      </mat-chip>
+      <mat-chip *ngIf="this.ticket.event.localizationName">
+        {{ this.ticket.event.localizationName }}
+      </mat-chip>
+    </div>
+    <div class="flex-container" id="custom-tab-list">
+      <app-custom-tab [label]="'No.'" [value]="this.index + ''"></app-custom-tab>
+      <app-custom-tab [label]="'Event id'" [value]="this.ticket.event.id + ''"></app-custom-tab>
+      <app-custom-tab [label]="'Firstname'" [value]="this.ticket.firstname"></app-custom-tab>
+      <app-custom-tab [label]="'Lastname'" [value]="this.ticket.lastname"></app-custom-tab>
+      <app-custom-tab [label]="'Phone number'" [value]="this.ticket.phoneNumber"></app-custom-tab>
+      <app-custom-tab [label]="'Adult'" [value]="this.ticket.isAdult ? 'Yes' : 'No'"></app-custom-tab>
+      <app-custom-tab [label]="'Student discount'" [value]="this.ticket.isStudent ? 'Yes' : 'No'"></app-custom-tab>
+      <app-custom-tab [label]="'Seat (row/number)'"
+                      [value]="this.ticket.seat ? this.ticket.seat.row + '/' + this.ticket.seat.number : '-'"></app-custom-tab>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button>Update</button>
+    <button mat-flat-button>Delete</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,94 @@
+@import "src/styles";
+
+mat-card {
+  width: 100%;
+  background: $dimWhite;
+  box-shadow: $box_shadow;
+  padding: 0.7rem;
+
+  @media screen and (max-width: 200px) {
+    padding: 0.7rem 0;
+    margin: 0;
+  }
+}
+
+mat-card-header {
+  padding-top: $padding_small;
+  padding-bottom: $padding_small;
+
+  @media screen and (max-width: 200px) {
+    padding: 0;
+  }
+
+  @media screen and (max-width: $breakpoint_zero) {
+    mat-card-title-group {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+mat-card-title {
+  color: $primary;
+  font-size: $font_size_large;
+  font-weight: 500;
+  word-break: break-word;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    text-align: center;
+  }
+}
+
+mat-card-subtitle {
+  color: $secondary;
+  font-size: $font_size_normal;
+  font-weight: 400;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    text-align: center;
+  }
+}
+
+mat-card-title + mat-card-subtitle {
+  margin-top: $margin_small;
+}
+
+mat-card-actions {
+  margin-top: $margin_normal;
+}
+
+.flex-container {
+  @media screen and (max-width: $breakpoint_zero) {
+    flex-direction: column;
+  }
+}
+
+.flex-container + .flex-container {
+  margin-top: $font_size_normal;
+}
+
+.flex-container#custom-tab-list {
+  gap: 2rem;
+  flex-direction: row;
+  flex-flow: wrap;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+.mdc-card__actions {
+  display: flex;
+  gap: 1rem;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    flex-direction: column;
+  }
+
+  button {
+    @media screen and (max-width: $breakpoint_zero) {
+      width: 100%;
+    }
+  }
+}
