@@ -1,0 +1,21 @@
+@import "src/styles";
+
+$margin_large: 5rem;
+
+.items-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mt-large {
+  margin-top: $margin_large;
+}
+
+.mt-normal {
+  margin-top: $margin_normal;
+}
+
+.flex-container {
+  gap: 3rem;
+}

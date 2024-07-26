@@ -7,4 +7,9 @@ export const privateRoutes: Route[] = [{
   component: PrivatePageComponent,
   canActivate: [privatePageGuard],
   loadChildren: () => import('src/app/private/dashboard/dashboard.routes').then(m => m.dashboardRoutes)
+}, {
+  path: 'ticket-list',
+  component: PrivatePageComponent,
+  canActivate: [privatePageGuard],
+  loadChildren: () => import('src/app/private/ticket/ticket.routes').then(m => m.ticketRoutes)
 }];

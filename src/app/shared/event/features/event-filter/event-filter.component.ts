@@ -95,7 +95,7 @@ export class EventFilterComponent {
   protected submitForm(): void {
     const eventFilter: any = {};
     if (!this.filterForm.valid) {
-      console.log('Not Valid');
+      return;
     }
     for (const valueKey in this.filterForm.value) {
       if (this.filterForm.value.hasOwnProperty(valueKey) && this.filterForm.value[valueKey]) {

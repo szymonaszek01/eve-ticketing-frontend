@@ -25,7 +25,7 @@ export class PrivatePageComponent {
   constructor(protected router: Router,
               protected authStore: Store<{ auth: AuthState }>,
               protected ticketStore: Store<{ ticket: TicketState }>,
-              private dialog: MatDialog
+              protected dialog: MatDialog
   ) {
     this.router = router;
     this.routeList = [{
@@ -45,6 +45,11 @@ export class PrivatePageComponent {
         dialogConfig.maxWidth = '80rem';
         this.dialog.open(TicketShoppingCartComponent, dialogConfig);
       }
+    }, {
+      path: '/private/ticket-list',
+      icon: 'playlist_add_check',
+      label: 'Tickets',
+      action: undefined
     }, {
       path: '/auth',
       icon: 'logout',
