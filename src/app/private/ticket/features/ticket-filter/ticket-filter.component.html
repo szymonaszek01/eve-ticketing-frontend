@@ -1,0 +1,64 @@
+<mat-card>
+  <form [formGroup]="this.filterForm" (ngSubmit)="this.submitForm()">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          Filters
+        </mat-card-title>
+      </mat-card-title-group>
+      <div class="sort-container">
+        <app-custom-tab *ngFor="let sortValue of this.sort" [label]="sortValue.split(',')[0]"
+                        [value]="sortValue.split(',')[1]">
+        </app-custom-tab>
+      </div>
+      <button class="sort-button" type="button" title="Sort" (click)="this.openDialog()">
+        <mat-icon>sort</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Code</mat-label>
+        <input id="code" formControlName="code" type="text" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Firstname</mat-label>
+        <input id="firstname" formControlName="firstname" type="text" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Lastname</mat-label>
+        <input id="lastname" formControlName="lastname" type="text" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone number</mat-label>
+        <input id="phoneNumber" formControlName="phoneNumber" type="text" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Min cost</mat-label>
+        <input id="minCost" formControlName="minCost" type="number" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Max cost</mat-label>
+        <input id="maxCost" formControlName="maxCost" type="number" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Min date</mat-label>
+        <input id="minDate" formControlName="minDate" [matDatepicker]="minDatePicker" matInput>
+        <mat-datepicker-toggle matIconSuffix [for]="minDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #minDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Max date</mat-label>
+        <input id="maxDate" formControlName="maxDate" [matDatepicker]="maxDatePicker" matInput>
+        <mat-datepicker-toggle matIconSuffix [for]="maxDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #maxDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Event id</mat-label>
+        <input id="eventId" formControlName="eventId" type="number" matInput>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-flat-button>Search</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

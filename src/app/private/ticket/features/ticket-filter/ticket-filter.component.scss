@@ -1,0 +1,111 @@
+@import "src/styles";
+
+mat-card {
+  width: 100%;
+  background: $dimWhite;
+  box-shadow: $box_shadow;
+  padding: 0.7rem;
+}
+
+mat-card-header {
+  padding-top: $padding_small;
+  padding-bottom: $padding_small;
+  margin-bottom: 0.85rem;
+  align-items: center;
+
+  @media screen and (max-width: $breakpoint_second) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 0.7rem;
+  }
+}
+
+.mat-mdc-card-title-group {
+  @media screen and (max-width: $breakpoint_second) {
+    justify-content: center;
+  }
+}
+
+mat-card-title {
+  color: $primary;
+  font-size: $font_size_large;
+  font-weight: 500;
+  word-break: break-word;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    text-align: center;
+  }
+}
+
+mat-card-content {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  gap: 1.5rem;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+mat-card-actions {
+  margin-top: $margin_normal;
+}
+
+.mdc-card__actions {
+  @media screen and (max-width: $breakpoint_zero) {
+    justify-content: center;
+  }
+}
+
+mat-form-field {
+  min-width: 18rem;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    width: 100%;
+    min-width: auto;
+  }
+
+  ::ng-deep .mat-mdc-form-field-infix {
+    width: 100%;
+  }
+}
+
+.sort-button {
+  display: flex;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $secondary;
+  color: $secondary;
+  cursor: pointer;
+  background: transparent;
+}
+
+.sort-button:hover {
+  box-shadow: $box_shadow;
+}
+
+.sort-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: right;
+  margin-right: 1rem;
+
+  @media screen and (max-width: $breakpoint_second) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 0.7rem;
+    margin-right: 0;
+  }
+}
