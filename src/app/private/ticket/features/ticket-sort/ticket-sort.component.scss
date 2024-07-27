@@ -1,0 +1,59 @@
+@import "src/styles";
+
+form {
+  background: $dimWhite;
+  box-shadow: $box_shadow;
+  padding: 0.7rem;
+}
+
+span {
+  color: $primary;
+  font-size: $font_size_large;
+  font-weight: 500;
+  word-break: break-word;
+  text-align: center;
+}
+
+mat-dialog-content {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  gap: 1.5rem;
+
+  @media screen and (max-width: $breakpoint_zero) {
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+.dialog-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 20px 24px;
+
+  button {
+    width: 100%;
+  }
+}
+
+.sort-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    color: $secondary;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+mat-button-toggle {
+  border-radius: 4px;
+}

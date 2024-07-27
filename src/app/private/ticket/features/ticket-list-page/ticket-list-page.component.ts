@@ -14,6 +14,9 @@ import { TicketState } from '../../models/ticket-state';
 import { ticketActions } from '../../data-access/ticket-actions';
 import { Ticket } from '../../models/ticket';
 import { selectFilter, selectList, selectPage, selectSize, selectSort, selectTotalElements } from '../../data-access/ticket-reducers';
+import { ticketListFilter } from '../../../../shared/shared/util/util';
+import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
+import { User } from '../../../../shared/shared/models/user';
 
 @Component({
   selector: 'app-ticket-list-page',
@@ -54,12 +57,16 @@ export class TicketListPageComponent extends PrivatePageComponent {
     this.page = 0;
     this.size = 0;
     this.totalElements = 0;
-    this.filter = undefined;
     this.sort = undefined;
-    this.ticketStore.dispatch(ticketActions.load({page: 0, size: 10, filter: undefined, sort: undefined}));
+    this.ticketStore.dispatch(ticketActions.load({page: 0, size: 10, filter: this.filter, sort: undefined}));
   }
 
   ngOnInit(): void {
+    this.authStore.select(selectAuth).subscribe(auth => {
+      if (auth) {
+        this.ticketStore.dispatch(ticketActions.setFilter({filter: ticketListFilter(auth.id)}));
+      }
+    });
     this.ticketStore.select(selectList).subscribe(ticketList => this.ticketList = ticketList);
     this.ticketStore.select(selectPage).subscribe(page => this.page = page);
     this.ticketStore.select(selectSize).subscribe(size => this.size = size);

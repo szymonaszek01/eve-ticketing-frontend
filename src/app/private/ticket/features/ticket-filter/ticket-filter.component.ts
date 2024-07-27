@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Store } from '@ngrx/store';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TicketState } from '../../models/ticket-state';
-import { selectSort } from '../../data-access/ticket-reducers';
+import { selectFilter, selectSort } from '../../data-access/ticket-reducers';
 import { TicketSortComponent } from '../ticket-sort/ticket-sort.component';
 import { ticketActions } from '../../data-access/ticket-actions';
 import { TicketFilter } from '../../models/ticket-filter';
@@ -16,6 +16,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { NgForOf } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ticketListFilter } from '../../../../shared/shared/util/util';
 
 @Component({
   selector: 'app-ticket-filter',
@@ -55,6 +56,8 @@ export class TicketFilterComponent {
 
   public sort: string[];
 
+  private filter: TicketFilter | undefined;
+
   constructor(private formBuilder: FormBuilder, private ticketStore: Store<{ ticket: TicketState }>, private dialog: MatDialog) {
     this.filterForm = this.formBuilder.group({
       code: [''],
@@ -75,6 +78,7 @@ export class TicketFilterComponent {
       const splitSortValue: string[] = sortValue.split(',');
       return `${splitSortValue[0].replace(new RegExp('_', 'g'), ' ').toUpperCase()},${splitSortValue[1]}`;
     }));
+    this.ticketStore.select(selectFilter).subscribe(filter => this.filter = filter);
   }
 
   public openDialog(): void {
@@ -87,7 +91,7 @@ export class TicketFilterComponent {
   }
 
   protected submitForm(): void {
-    const ticketFilter: any = {};
+    const ticketFilter: any = {...this.filter};
     if (!this.filterForm.valid) {
       return;
     }

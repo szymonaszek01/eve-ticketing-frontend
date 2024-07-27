@@ -68,3 +68,20 @@ export function ticketReservedFilter(userId: number): TicketFilter {
     paid: false
   };
 }
+
+export function ticketListFilter(userId: number): TicketFilter {
+  return {
+    code: '',
+    firstname: '',
+    lastname: '',
+    phoneNumber: '',
+    minCost: '',
+    maxCost: '',
+    minDate: '',
+    maxDate: '',
+    eventId: 0,
+    userId,
+    seatId: 0,
+    paid: true
+  };
+}
