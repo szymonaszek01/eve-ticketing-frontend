@@ -6,7 +6,7 @@
         <mat-icon>do_not_disturb</mat-icon>
         <p>Empty image</p>
       </div>
-      <app-image-uploader [store]="this.store" [action]="this.onImageUploadClick"></app-image-uploader>
+      <app-image-uploader [store]="this.store" [user]="this.user" [action]="this.onImageUploadClick"></app-image-uploader>
     </div>
     <div class="flex-container" id="custom-tab-list">
       <app-custom-tab [label]="'Id'" [value]="this.user.id + ''"></app-custom-tab>

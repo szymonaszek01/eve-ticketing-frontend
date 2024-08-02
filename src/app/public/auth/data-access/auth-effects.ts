@@ -72,7 +72,7 @@ export const uploadAuthImageEffect = createEffect(
     return actions$.pipe(
       ofType(authActions.uploadAuthImage),
       mergeMap(action =>
-        firebaseService.upload(action.file, action.entity, action.field).pipe(
+        firebaseService.upload(action.file, action.entity, action.id, action.field, action.update).pipe(
           map(firebaseRes => authActions.uploadAuthImageSuccess({firebaseRes})),
           catchError(e => of(authActions.loadError({error: e.error})))
         )

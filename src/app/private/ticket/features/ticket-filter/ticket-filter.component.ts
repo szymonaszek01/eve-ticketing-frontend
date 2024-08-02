@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Store } from '@ngrx/store';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TicketState } from '../../models/ticket-state';
-import { selectFilter, selectSort } from '../../data-access/ticket-reducers';
+import { selectSort } from '../../data-access/ticket-reducers';
 import { TicketSortComponent } from '../ticket-sort/ticket-sort.component';
 import { ticketActions } from '../../data-access/ticket-actions';
 import { TicketFilter } from '../../models/ticket-filter';
@@ -17,6 +17,9 @@ import { MatInput } from '@angular/material/input';
 import { NgForOf } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ticketListFilter } from '../../../../shared/shared/util/util';
+import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
+import { AuthState } from '../../../../public/auth/models/auth-state';
+import { User } from '../../../../shared/shared/models/user';
 
 @Component({
   selector: 'app-ticket-filter',
@@ -56,9 +59,13 @@ export class TicketFilterComponent {
 
   public sort: string[];
 
-  private filter: TicketFilter | undefined;
+  private user: User | undefined;
 
-  constructor(private formBuilder: FormBuilder, private ticketStore: Store<{ ticket: TicketState }>, private dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder,
+              private authStore: Store<{ auth: AuthState }>,
+              private ticketStore: Store<{ ticket: TicketState }>,
+              private dialog: MatDialog
+  ) {
     this.filterForm = this.formBuilder.group({
       code: [''],
       firstname: [''],
@@ -74,11 +81,11 @@ export class TicketFilterComponent {
   }
 
   ngOnInit(): void {
+    this.authStore.select(selectAuth).subscribe(auth => this.user = auth);
     this.ticketStore.select(selectSort).subscribe(sort => this.sort = (sort ?? []).map(sortValue => {
       const splitSortValue: string[] = sortValue.split(',');
       return `${splitSortValue[0].replace(new RegExp('_', 'g'), ' ').toUpperCase()},${splitSortValue[1]}`;
     }));
-    this.ticketStore.select(selectFilter).subscribe(filter => this.filter = filter);
   }
 
   public openDialog(): void {
@@ -91,10 +98,10 @@ export class TicketFilterComponent {
   }
 
   protected submitForm(): void {
-    const ticketFilter: any = {...this.filter};
-    if (!this.filterForm.valid) {
+    if (!this.user || !this.filterForm.valid) {
       return;
     }
+    const ticketFilter: any = {...ticketListFilter(this.user.id)};
     for (const valueKey in this.filterForm.value) {
       if (this.filterForm.value.hasOwnProperty(valueKey) && this.filterForm.value[valueKey]) {
         ticketFilter[valueKey] = (valueKey.includes('minDate') || valueKey.includes('maxDate'))

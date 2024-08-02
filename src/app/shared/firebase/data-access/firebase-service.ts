@@ -11,11 +11,11 @@ import { HttpParams } from '@angular/common/http';
 })
 export class FirebaseService extends Service<Auth> {
 
-  upload(file: File, entity: string, field: string): Observable<FirebaseRes> {
+  upload(file: File, entity: string, id: number, field: string, update: boolean): Observable<FirebaseRes> {
     const formData: FormData = new FormData();
     formData.append('file', file);
     let params = new HttpParams();
-    params = params.appendAll({entity, field});
+    params = params.appendAll({entity, id, field, update});
     return this.http.post<FirebaseRes>(
       environment.apiUrl + environment.firebaseApiUrl + '/upload',
       formData,

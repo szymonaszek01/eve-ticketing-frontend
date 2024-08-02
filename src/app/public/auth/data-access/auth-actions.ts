@@ -18,7 +18,7 @@ export const authActions = createActionGroup({
     'Register success': props<{ auth: Auth }>(),
     'Regenerate auth token': props<{ regenerateAuthTokenReq: RegenerateAuthTokenReq }>(),
     'Regenerate auth token success': props<{ auth: Auth }>(),
-    'Upload auth image': props<{ file: File, entity: string, field: string }>(),
+    'Upload auth image': props<{ file: File, entity: string, id: number, field: string, update: boolean }>(),
     'Upload auth image success': props<{ firebaseRes: FirebaseRes }>(),
     Clear: emptyProps(),
     'Load error': props<{ error: ApiError | undefined }>()

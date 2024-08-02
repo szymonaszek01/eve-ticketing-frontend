@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf, NgOptimizedImage } from '@angular/common';
+import { User } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-image-uploader',
@@ -20,6 +21,9 @@ export class ImageUploaderComponent {
 
   @Input()
   public store: any;
+
+  @Input()
+  public user: User | undefined;
 
   protected onClick(event: any): void {
     const file: File = event.target.files[0];

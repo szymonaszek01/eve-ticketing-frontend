@@ -64,6 +64,6 @@ export class UserCardComponent {
   }
 
   protected onImageUploadClick(file: File): void {
-    this.store.dispatch(authActions.uploadAuthImage({file, entity: 'auth-user', field: 'image'}));
+    this.store.dispatch(authActions.uploadAuthImage({file, entity: 'auth-user', id: this.user.id, field: 'image', update: true}));
   }
 }
