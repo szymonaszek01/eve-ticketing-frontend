@@ -15,7 +15,7 @@
     <app-timer [createdAt]="this.ticket.createdAt"></app-timer>
   </div>
   <div class="action">
-    <mat-icon>file_download</mat-icon>
+    <mat-icon (click)="this.downloadTicket()">file_download</mat-icon>
     <mat-icon (click)="this.updateTicket()">edit</mat-icon>
     <mat-icon (click)="this.deleteTicket()">remove_shopping_cart</mat-icon>
   </div>

@@ -52,4 +52,10 @@ export class TicketShoppingCartItemComponent {
     dialogConfig.data = {ticket: this.ticket};
     this.dialog.open(TicketDeleteComponent, dialogConfig);
   }
+
+  protected downloadTicket(): void {
+    if (this.ticket && this.ticket.pdf) {
+      window.location.href = this.ticket.pdf;
+    }
+  }
 }
