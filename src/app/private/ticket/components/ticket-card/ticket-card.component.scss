@@ -86,9 +86,12 @@ mat-card-actions {
     flex-direction: column;
   }
 
-  button {
-    @media screen and (max-width: $breakpoint_zero) {
-      width: 100%;
-    }
+  mat-icon {
+    color: #00dddd;
+    border-radius: 4px;
+    background: $dimWhite;
+    box-shadow: $box_shadow;
+    padding: 5px;
+    cursor: pointer;
   }
 }

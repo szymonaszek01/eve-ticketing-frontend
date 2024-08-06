@@ -13,6 +13,10 @@ import {
 } from '@angular/material/card';
 import { MatChip } from '@angular/material/chips';
 import { NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { TicketCreateComponent } from '../../features/ticket-create/ticket-create.component';
+import { TicketDeleteComponent } from '../../features/ticket-delete/ticket-delete.component';
 
 @Component({
   selector: 'app-ticket-card',
@@ -28,7 +32,8 @@ import { NgIf } from '@angular/common';
     MatCardTitle,
     MatCardTitleGroup,
     MatChip,
-    NgIf
+    NgIf,
+    MatIcon
   ],
   templateUrl: './ticket-card.component.html',
   styleUrl: './ticket-card.component.scss'
@@ -41,6 +46,32 @@ export class TicketCardComponent {
   @Input()
   public index: number | undefined;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
+  }
+
+  protected updateTicket(): void {
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.maxWidth = '25rem';
+    dialogConfig.data = {ticket: this.ticket};
+    this.dialog.open(TicketCreateComponent, dialogConfig);
+  }
+
+  protected deleteTicket(): void {
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    dialogConfig.maxWidth = '25rem';
+    dialogConfig.data = {ticket: this.ticket};
+    this.dialog.open(TicketDeleteComponent, dialogConfig);
+  }
+
+  protected downloadTicket(): void {
+    if (this.ticket && this.ticket.pdf) {
+      window.location.href = this.ticket.pdf;
+    }
   }
 }

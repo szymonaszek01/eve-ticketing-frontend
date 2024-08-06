@@ -1,6 +1,6 @@
 <form (ngSubmit)="this.onSubmit()">
   <span mat-dialog-title>Delete ticket</span>
-  <mat-error *ngIf="this.apiError">
+  <mat-error *ngIf="this.apiError && this.apiError.errors && this.apiError.errors.length > 0">
     <mat-icon>info</mat-icon>
     <span>{{this.error()}}</span>
   </mat-error>
