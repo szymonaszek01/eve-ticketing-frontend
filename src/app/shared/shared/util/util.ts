@@ -1,6 +1,9 @@
 import { AbstractControl } from '@angular/forms';
 import { ApiError } from '../models/api-error';
 import { TicketFilter } from '../../../private/ticket/models/ticket-filter';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { TicketCreateComponent } from '../../../private/ticket/features/ticket-create/ticket-create.component';
+import { TicketDeleteComponent } from '../../../private/ticket/features/ticket-delete/ticket-delete.component';
 
 export function renderError(formControl: AbstractControl, key: string): string {
   if (formControl.hasError('required')) {
@@ -84,4 +87,24 @@ export function ticketListFilter(userId: number): TicketFilter {
     seatId: 0,
     paid: true
   };
+}
+
+export enum TicketMatDialogAction {
+  CREATE,
+  UPDATE,
+  DELETE
+}
+
+export function runTicketMatDialogAction(dialog: MatDialog, data: any, action: TicketMatDialogAction): void {
+  const dialogConfig: MatDialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = '100%';
+  dialogConfig.maxWidth = '25rem';
+  dialogConfig.data = {[action !== TicketMatDialogAction.CREATE ? 'ticket' : 'event']: data};
+  if (action !== TicketMatDialogAction.DELETE) {
+    dialog.open(TicketCreateComponent, dialogConfig);
+  } else {
+    dialog.open(TicketDeleteComponent, dialogConfig);
+  }
 }

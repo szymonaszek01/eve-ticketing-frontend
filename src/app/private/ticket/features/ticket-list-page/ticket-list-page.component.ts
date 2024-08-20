@@ -13,10 +13,18 @@ import { TicketFilter } from '../../models/ticket-filter';
 import { TicketState } from '../../models/ticket-state';
 import { ticketActions } from '../../data-access/ticket-actions';
 import { Ticket } from '../../models/ticket';
-import { selectFilter, selectList, selectPage, selectSize, selectSort, selectTotalElements } from '../../data-access/ticket-reducers';
+import {
+  selectFilter,
+  selectLastRemoved,
+  selectLastUpdated,
+  selectList,
+  selectPage,
+  selectSize,
+  selectSort,
+  selectTotalElements
+} from '../../data-access/ticket-reducers';
 import { ticketListFilter } from '../../../../shared/shared/util/util';
 import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
-import { User } from '../../../../shared/shared/models/user';
 
 @Component({
   selector: 'app-ticket-list-page',
@@ -78,6 +86,16 @@ export class TicketListPageComponent extends PrivatePageComponent {
     this.ticketStore.select(selectSort).subscribe(sort => {
       this.sort = sort;
       this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+    });
+    this.ticketStore.select(selectLastUpdated).subscribe(ticket => {
+      if (ticket) {
+        this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      }
+    });
+    this.ticketStore.select(selectLastRemoved).subscribe(ticket => {
+      if (ticket) {
+        this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      }
     });
   }
 

@@ -14,9 +14,8 @@ import {
 import { MatChip } from '@angular/material/chips';
 import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { TicketCreateComponent } from '../../features/ticket-create/ticket-create.component';
-import { TicketDeleteComponent } from '../../features/ticket-delete/ticket-delete.component';
+import { MatDialog } from '@angular/material/dialog';
+import { runTicketMatDialogAction, TicketMatDialogAction } from '../../../../shared/shared/util/util';
 
 @Component({
   selector: 'app-ticket-card',
@@ -50,23 +49,11 @@ export class TicketCardComponent {
   }
 
   protected updateTicket(): void {
-    const dialogConfig: MatDialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '100%';
-    dialogConfig.maxWidth = '25rem';
-    dialogConfig.data = {ticket: this.ticket};
-    this.dialog.open(TicketCreateComponent, dialogConfig);
+    runTicketMatDialogAction(this.dialog, this.ticket, TicketMatDialogAction.UPDATE);
   }
 
   protected deleteTicket(): void {
-    const dialogConfig: MatDialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '100%';
-    dialogConfig.maxWidth = '25rem';
-    dialogConfig.data = {ticket: this.ticket};
-    this.dialog.open(TicketDeleteComponent, dialogConfig);
+    runTicketMatDialogAction(this.dialog, this.ticket, TicketMatDialogAction.DELETE);
   }
 
   protected downloadTicket(): void {

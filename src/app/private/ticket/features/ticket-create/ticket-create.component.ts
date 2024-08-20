@@ -89,12 +89,14 @@ export class TicketCreateComponent {
     });
     this.ticketStore.select(selectLastUpdated).subscribe(ticket => {
       if (this.user && ticket) {
-        this.ticketStore.dispatch(ticketActions.loadReserved({
-          page: 0,
-          size: 5,
-          filter: ticketReservedFilter(this.user.id),
-          sort: undefined
-        }));
+        if (!ticket.paid) {
+          this.ticketStore.dispatch(ticketActions.loadReserved({
+            page: 0,
+            size: 5,
+            filter: ticketReservedFilter(this.user.id),
+            sort: undefined
+          }));
+        }
         this.dialogRef.close();
       }
     });

@@ -34,6 +34,7 @@
       <app-custom-tab [label]="'Student discount'" [value]="this.ticket.isStudent ? 'Yes' : 'No'"></app-custom-tab>
       <app-custom-tab [label]="'Seat (row/number)'"
                       [value]="this.ticket.seat ? this.ticket.seat.row + '/' + this.ticket.seat.number : '-'"></app-custom-tab>
+      <app-custom-tab [label]="'Paid'" [value]="this.ticket.paid + ''"></app-custom-tab>
     </div>
   </mat-card-content>
   <mat-card-actions>

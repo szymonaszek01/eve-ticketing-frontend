@@ -60,12 +60,14 @@ export class TicketDeleteComponent {
       if (ticket.id !== this.ticket?.id) {
         return;
       }
-      this.ticketStore.dispatch(ticketActions.loadReserved({
-        page: 0,
-        size: 5,
-        filter: ticketReservedFilter(ticket.userId),
-        sort: undefined
-      }));
+      if (!ticket.paid) {
+        this.ticketStore.dispatch(ticketActions.loadReserved({
+          page: 0,
+          size: 5,
+          filter: ticketReservedFilter(ticket.userId),
+          sort: undefined
+        }));
+      }
       this.dialogRef.close();
     });
     this.ticketStore.select(selectError).subscribe(apiError => this.apiError = apiError);

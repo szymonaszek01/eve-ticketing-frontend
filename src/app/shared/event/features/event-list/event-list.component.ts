@@ -14,8 +14,8 @@ import { EmptyContentCardComponent } from '../../../shared/components/empty-cont
 import { AuthState } from '../../../../public/auth/models/auth-state';
 import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { TicketCreateComponent } from '../../../../private/ticket/features/ticket-create/ticket-create.component';
+import { MatDialog } from '@angular/material/dialog';
+import { runTicketMatDialogAction, TicketMatDialogAction } from '../../../shared/util/util';
 
 @Component({
   selector: 'app-event-list',
@@ -91,13 +91,7 @@ export class EventListComponent {
     if (!this.isLoggedIn) {
       this.router.navigateByUrl('/auth').catch(error => console.log(error));
     } else {
-      const dialogConfig: MatDialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = '100%';
-      dialogConfig.maxWidth = '25rem';
-      dialogConfig.data = {event};
-      this.dialog.open(TicketCreateComponent, dialogConfig);
+      runTicketMatDialogAction(this.dialog, event, TicketMatDialogAction.CREATE);
     }
   }
 }

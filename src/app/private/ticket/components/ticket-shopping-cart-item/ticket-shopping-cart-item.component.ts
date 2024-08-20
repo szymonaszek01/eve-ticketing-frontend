@@ -4,10 +4,9 @@ import { CustomTabComponent } from '../../../../shared/shared/components/custom-
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { TicketCreateComponent } from '../../features/ticket-create/ticket-create.component';
+import { MatDialog } from '@angular/material/dialog';
 import { TimerComponent } from '../../../../shared/shared/features/timer/timer.component';
-import { TicketDeleteComponent } from '../../features/ticket-delete/ticket-delete.component';
+import { runTicketMatDialogAction, TicketMatDialogAction } from '../../../../shared/shared/util/util';
 
 @Component({
   selector: 'app-ticket-shopping-cart-item',
@@ -34,23 +33,11 @@ export class TicketShoppingCartItemComponent {
   }
 
   protected updateTicket(): void {
-    const dialogConfig: MatDialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '100%';
-    dialogConfig.maxWidth = '25rem';
-    dialogConfig.data = {ticket: this.ticket};
-    this.dialog.open(TicketCreateComponent, dialogConfig);
+    runTicketMatDialogAction(this.dialog, this.ticket, TicketMatDialogAction.UPDATE);
   }
 
   protected deleteTicket(): void {
-    const dialogConfig: MatDialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '100%';
-    dialogConfig.maxWidth = '25rem';
-    dialogConfig.data = {ticket: this.ticket};
-    this.dialog.open(TicketDeleteComponent, dialogConfig);
+    runTicketMatDialogAction(this.dialog, this.ticket, TicketMatDialogAction.DELETE);
   }
 
   protected downloadTicket(): void {
