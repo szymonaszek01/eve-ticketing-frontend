@@ -1,0 +1,20 @@
+<form [formGroup]="this.authForm.formGroup" (ngSubmit)="this.onSubmit()">
+  <span mat-dialog-title>{{ this.authForm.title }}<br><p class="warning">You will be logged out after updating your personal data successfully!</p></span>
+  <mat-error *ngIf="this.apiError">
+    <mat-icon>info</mat-icon>
+    <span>{{ this.error(undefined) }}</span>
+  </mat-error>
+  <mat-card-content>
+    <mat-form-field appearance="outline" *ngFor="let authMatFormField of this.authForm.authMatFormFieldList">
+      <mat-label>{{ authMatFormField.matLabel }}</mat-label>
+      <input (input)="this.onInput()" id="{{authMatFormField.id}}"
+             formControlName="{{authMatFormField.formControlName}}" type="{{authMatFormField.type}}"
+             autocomplete="{{authMatFormField.autoComplete}}" matInput>
+      <mat-error>{{ this.error(authMatFormField.key) }}</mat-error>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions class="dialog-actions">
+    <button type="submit" mat-flat-button class="w-full">{{ this.authForm.title }}</button>
+    <button type="button" mat-flat-button mat-dialog-close>Close</button>
+  </mat-card-actions>
+</form>

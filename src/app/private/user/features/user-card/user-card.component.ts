@@ -19,6 +19,8 @@ import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
 import { MatIcon } from '@angular/material/icon';
 import { ImageUploaderComponent } from '../../../../shared/firebase/features/image-uploader/image-uploader.component';
 import { authActions } from '../../../../public/auth/data-access/auth-actions';
+import { runUserEditMatDialogAction } from '../../../../shared/shared/util/util';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-card',
@@ -46,7 +48,7 @@ export class UserCardComponent {
 
   protected user: User;
 
-  constructor(protected store: Store<{ auth: AuthState }>) {
+  constructor(protected store: Store<{ auth: AuthState }>, private dialog: MatDialog) {
     this.user = {
       id: 0,
       email: '',
@@ -65,5 +67,9 @@ export class UserCardComponent {
 
   protected onImageUploadClick(file: File): void {
     this.store.dispatch(authActions.uploadAuthImage({file, entity: 'auth-user', id: this.user.id, field: 'image', update: true}));
+  }
+
+  protected onEditUserClick(): void {
+    runUserEditMatDialogAction(this.dialog, this.user);
   }
 }

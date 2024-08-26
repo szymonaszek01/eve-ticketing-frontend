@@ -4,6 +4,7 @@ import { TicketFilter } from '../../../private/ticket/models/ticket-filter';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TicketCreateComponent } from '../../../private/ticket/features/ticket-create/ticket-create.component';
 import { TicketDeleteComponent } from '../../../private/ticket/features/ticket-delete/ticket-delete.component';
+import { UserEditComponent } from '../../../private/user/features/user-edit/user-edit.component';
 
 export function renderError(formControl: AbstractControl, key: string): string {
   if (formControl.hasError('required')) {
@@ -96,15 +97,26 @@ export enum TicketMatDialogAction {
 }
 
 export function runTicketMatDialogAction(dialog: MatDialog, data: any, action: TicketMatDialogAction): void {
-  const dialogConfig: MatDialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true;
-  dialogConfig.autoFocus = true;
-  dialogConfig.width = '100%';
-  dialogConfig.maxWidth = '25rem';
+  const dialogConfig: MatDialogConfig = getBaseMatDialogConfiguration();
   dialogConfig.data = {[action !== TicketMatDialogAction.CREATE ? 'ticket' : 'event']: data};
   if (action !== TicketMatDialogAction.DELETE) {
     dialog.open(TicketCreateComponent, dialogConfig);
   } else {
     dialog.open(TicketDeleteComponent, dialogConfig);
   }
+}
+
+export function runUserEditMatDialogAction(dialog: MatDialog, data: any): void {
+  const dialogConfig: MatDialogConfig = getBaseMatDialogConfiguration();
+  dialogConfig.data = {user: data};
+  dialog.open(UserEditComponent, dialogConfig);
+}
+
+export function getBaseMatDialogConfiguration(): MatDialogConfig {
+  const dialogConfig: MatDialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = '100%';
+  dialogConfig.maxWidth = '25rem';
+  return dialogConfig;
 }

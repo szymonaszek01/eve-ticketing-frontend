@@ -18,7 +18,7 @@
       <app-custom-tab [label]="'Phone number'" [value]="this.user.phoneNumber"></app-custom-tab>
       <app-custom-tab [label]="'Role'" [value]="this.user.role"></app-custom-tab>
       <div class="button-container">
-        <button mat-flat-button>Edit profile</button>
+        <button mat-flat-button (click)="this.onEditUserClick()">Edit user</button>
       </div>
     </div>
   </mat-card-content>
