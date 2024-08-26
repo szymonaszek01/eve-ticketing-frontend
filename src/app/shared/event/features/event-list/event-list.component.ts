@@ -69,16 +69,23 @@ export class EventListComponent {
     this.eventStore.select(selectTotalElements).subscribe(totalElements => this.totalElements = totalElements);
     this.eventStore.select(selectFilter).subscribe(filter => {
       this.filter = filter;
-      this.eventStore.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      if (this.size > 0) {
+        this.eventStore.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      }
     });
     this.eventStore.select(selectSort).subscribe(sort => {
       this.sort = sort;
-      this.eventStore.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      if (this.size > 0) {
+        this.eventStore.dispatch(eventActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      }
     });
     this.authStore.select(selectAuth).subscribe(auth => this.isLoggedIn = auth !== undefined);
   }
 
   public pageHandler(pageEvent: PageEvent): void {
+    if (pageEvent.pageSize < 1) {
+      return;
+    }
     this.eventStore.dispatch(eventActions.load({
       page: pageEvent.pageIndex,
       size: pageEvent.pageSize,

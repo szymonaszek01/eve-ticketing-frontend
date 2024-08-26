@@ -81,25 +81,32 @@ export class TicketListPageComponent extends PrivatePageComponent {
     this.ticketStore.select(selectTotalElements).subscribe(totalElements => this.totalElements = totalElements);
     this.ticketStore.select(selectFilter).subscribe(filter => {
       this.filter = filter;
-      this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      if (this.size > 0) {
+        this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      }
     });
     this.ticketStore.select(selectSort).subscribe(sort => {
       this.sort = sort;
-      this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      if (this.size > 0) {
+        this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
+      }
     });
     this.ticketStore.select(selectLastUpdated).subscribe(ticket => {
-      if (ticket) {
+      if (ticket && this.size > 0) {
         this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
       }
     });
     this.ticketStore.select(selectLastRemoved).subscribe(ticket => {
-      if (ticket) {
+      if (ticket && this.size > 0) {
         this.ticketStore.dispatch(ticketActions.load({page: this.page, size: this.size, filter: this.filter, sort: this.sort}));
       }
     });
   }
 
   public pageHandler(pageEvent: PageEvent): void {
+    if (this.size < 1) {
+      return;
+    }
     this.ticketStore.dispatch(ticketActions.load({
       page: pageEvent.pageIndex,
       size: pageEvent.pageSize,
