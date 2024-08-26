@@ -58,7 +58,16 @@ export class UserService extends BaseService<User, UserFilter> {
     );
   }
 
-  update(user: User): Observable<User> {
-    return of<User>(this.userList[0]).pipe(delay(3000));
+  update(values: any): Observable<User> {
+    return this.http.put<User>(
+      environment.apiUrl + environment.authUserApiUrl + '/update',
+      this.toSnakeCase({...values})
+    ).pipe(
+      map(response => {
+        const user: User = this.toCamelCase(response);
+        return {...user, createdAt: new Date(user.createdAt)};
+      }),
+      catchError(error => throwError(error))
+    );
   }
 }

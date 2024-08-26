@@ -26,7 +26,7 @@ export const updateUserEffect = createEffect(
     return actions$.pipe(
       ofType(userActions.update),
       mergeMap(action =>
-        userService.update(action.user).pipe(
+        userService.update(action.values).pipe(
           map(user => userActions.updateSuccess({user})),
           catchError(e => of(userActions.loadError({error: e.error})))
         )
@@ -46,16 +46,6 @@ export const removeUserEffect = createEffect(
           catchError(e => of(userActions.loadError({error: e.error})))
         )
       )
-    );
-  }, {functional: true}
-);
-
-export const clearUserListEffect = createEffect(
-  (actions$ = inject(Actions),
-   userService = inject(UserService)) => {
-    return actions$.pipe(
-      ofType(userActions.clear),
-      tap(() => console.log('[User] state was cleared'))
     );
   }, {functional: true}
 );

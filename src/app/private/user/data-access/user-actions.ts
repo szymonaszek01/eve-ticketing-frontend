@@ -9,7 +9,7 @@ export const userActions = createActionGroup({
   events: {
     Load: props<{ page: number, size: number, filter: UserFilter | undefined, sort: string[] | undefined }>(),
     'Load success': props<{ page: Page<User> }>(),
-    Update: props<{ user: User }>(),
+    Update: props<{ values: any }>(),
     'Update success': props<{ user: User }>(),
     Remove: props<{ user: User }>(),
     'Remove success': props<{ user: User }>(),
