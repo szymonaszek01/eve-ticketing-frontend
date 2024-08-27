@@ -16,6 +16,7 @@ import { selectAuth } from '../../../../public/auth/data-access/auth-reducers';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { runTicketMatDialogAction, TicketMatDialogAction } from '../../../shared/util/util';
+import { EventState } from '../../data-access/event-state';
 
 @Component({
   selector: 'app-event-list',
@@ -47,7 +48,7 @@ export class EventListComponent {
 
   private isLoggedIn: boolean;
 
-  constructor(private eventStore: Store<{ event: BaseState<Event, EventFilter> }>,
+  constructor(private eventStore: Store<{ event: EventState }>,
               private authStore: Store<{ auth: AuthState }>,
               private router: Router,
               private dialog: MatDialog

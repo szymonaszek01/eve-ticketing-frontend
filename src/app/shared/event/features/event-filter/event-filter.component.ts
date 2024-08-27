@@ -26,6 +26,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EventSortComponent } from '../event-sort/event-sort.component';
 import { selectSort } from '../../data-access/event-reducers';
+import { EventState } from '../../data-access/event-state';
 
 @Component({
   selector: 'app-event-filter',
@@ -63,7 +64,7 @@ export class EventFilterComponent {
 
   public sort: string[];
 
-  constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event, EventFilter> }>, private dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ event: EventState }>, private dialog: MatDialog) {
     this.filterForm = this.formBuilder.group({
       name: [''],
       minUnitPrice: ['', [Validators.min(0)]],

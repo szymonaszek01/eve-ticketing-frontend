@@ -20,6 +20,21 @@ export const loadEventListEffect = createEffect(
   }, {functional: true}
 );
 
+export const loadCreatedListEffect = createEffect(
+  (actions$ = inject(Actions),
+   eventService = inject(EventService)) => {
+    return actions$.pipe(
+      ofType(eventActions.loadCreated),
+      mergeMap(action =>
+        eventService.getAll(action.page, action.size, action.filter, action.sort).pipe(
+          map(page => eventActions.loadCreatedSuccess({page})),
+          catchError(e => of(eventActions.loadError({error: e.error})))
+        )
+      )
+    );
+  }, {functional: true}
+);
+
 export const addEventEffect = createEffect(
   (actions$ = inject(Actions),
    eventService = inject(EventService)) => {

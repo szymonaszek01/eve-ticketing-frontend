@@ -9,6 +9,8 @@ export const eventActions = createActionGroup({
   events: {
     Load: props<{ page: number, size: number, filter: EventFilter | undefined, sort: string[] | undefined }>(),
     'Load success': props<{ page: Page<Event> }>(),
+    'Load created': props<{ page: number, size: number, filter: EventFilter | undefined, sort: string[] | undefined }>(),
+    'Load created success': props<{ page: Page<Event> }>(),
     Add: props<{ event: Event }>(),
     'Add success': props<{ event: Event }>(),
     Update: props<{ event: Event }>(),

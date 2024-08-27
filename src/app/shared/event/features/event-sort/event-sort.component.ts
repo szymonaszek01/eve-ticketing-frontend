@@ -7,15 +7,13 @@ import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field'
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { BaseState } from '../../../shared/models/base-state';
-import { Event } from '../../models/event';
 import { MatDialogActions, MatDialogClose, MatDialogContainer, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { NgForOf } from '@angular/common';
 import { ToggleButton } from '../../../shared/models/toggle-button';
 import { eventActions } from '../../data-access/event-actions';
-import { EventFilter } from '../../models/event-filter';
+import { EventState } from '../../data-access/event-state';
 
 @Component({
   selector: 'app-event-sort',
@@ -63,7 +61,7 @@ export class EventSortComponent {
 
   public toggleButtonList: ToggleButton[];
 
-  constructor(private formBuilder: FormBuilder, private store: Store<{ event: BaseState<Event, EventFilter> }>) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ event: EventState }>) {
     this.sortForm = this.formBuilder.group({
       id: [''],
       start_at: [''],
