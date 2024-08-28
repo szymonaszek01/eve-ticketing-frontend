@@ -28,6 +28,21 @@ export const privatePageGuard = () => {
   );
 };
 
+export const adminPageGuard = () => {
+  const router = inject(Router);
+  const state = inject(Store<{ auth: AuthState }>);
+  return state.pipe(
+    select(selectAuth),
+    tap(auth => {
+      if (!auth || auth.role.toUpperCase() !== 'ADMIN') {
+        state.dispatch(authActions.clear());
+        removeFromLocalStorage('auth');
+        router.navigateByUrl('/auth').catch(error => console.log(error));
+      }
+    })
+  );
+};
+
 const hasAuthValidTokens = (auth: Auth): boolean => {
   return !!(auth.authToken && auth.authToken.length > 0 && auth.refreshToken && auth.refreshToken.length > 0);
 };

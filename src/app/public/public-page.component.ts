@@ -22,22 +22,26 @@ export class PublicPageComponent {
       path: '/',
       icon: 'house',
       label: 'Home',
-      action: undefined
+      action: undefined,
+      active: true
     }, {
       path: '/auth',
       icon: 'login',
       label: 'Login',
-      action: undefined
+      action: undefined,
+      active: true
     }, {
       path: '/contact',
       icon: 'mail',
       label: 'Contact',
-      action: undefined
+      action: undefined,
+      active: true
     }, {
       path: '/settings',
       icon: 'settings',
       label: 'Settings',
-      action: undefined
+      action: undefined,
+      active: true
     }];
   }
 

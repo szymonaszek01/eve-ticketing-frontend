@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { PrivatePageComponent } from './private-page.component';
-import { privatePageGuard } from './private.guards';
+import { adminPageGuard, privatePageGuard } from './private.guards';
 
 export const privateRoutes: Route[] = [{
   path: 'dashboard',
@@ -12,4 +12,9 @@ export const privateRoutes: Route[] = [{
   component: PrivatePageComponent,
   canActivate: [privatePageGuard],
   loadChildren: () => import('src/app/private/ticket/ticket.routes').then(m => m.ticketRoutes)
+}, {
+  path: 'admin',
+  component: PrivatePageComponent,
+  canActivate: [privatePageGuard, adminPageGuard],
+  loadChildren: () => import('src/app/private/admin/admin.routes').then(m => m.adminRoutes)
 }];
