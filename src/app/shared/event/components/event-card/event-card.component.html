@@ -1,41 +1,44 @@
 <mat-card *ngIf="this.event">
-  <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>
-        {{ this.event.name }}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{ this.event.description }}
-      </mat-card-subtitle>
-    </mat-card-title-group>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="flex-container">
-      <mat-chip>
-        {{ this.event.country }}
-      </mat-chip>
-      <mat-chip>
-        {{ this.event.address }}
-      </mat-chip>
-      <mat-chip *ngIf="this.event.localizationName">
-        {{ this.event.localizationName }}
-      </mat-chip>
-      <mat-chip>
-        {{ this.event.unitPrice + this.event.currency }}
-      </mat-chip>
-    </div>
-    <div class="flex-container" id="custom-tab-list">
-      <app-custom-tab [label]="'Sold out'" [value]="this.event.isSoldOut + ''"></app-custom-tab>
-      <app-custom-tab [label]="'Start at'"
-                      [value]="this.event.startAt.toLocaleDateString() + ' ' + this.event.startAt.toLocaleTimeString()"></app-custom-tab>
-      <app-custom-tab [label]="'End at'"
-                      [value]="this.event.endAt.toLocaleDateString() + ' ' + this.event.endAt.toLocaleTimeString()"></app-custom-tab>
-      <app-custom-tab [label]="'Max ticket amount'" [value]="this.event.maxTicketAmount + ''"></app-custom-tab>
-      <app-custom-tab [label]="'Students discount'" [value]="this.event.studentsDiscount + '%'"></app-custom-tab>
-      <app-custom-tab [label]="'Children discount'" [value]="this.event.childrenDiscount + '%'"></app-custom-tab>
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-flat-button (click)="this.onClick()">Buy ticket</button>
-  </mat-card-actions>
+  <div>
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          {{ this.event.name }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ this.event.description }}
+        </mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex-container">
+        <mat-chip>
+          {{ this.event.country }}
+        </mat-chip>
+        <mat-chip>
+          {{ this.event.address }}
+        </mat-chip>
+        <mat-chip *ngIf="this.event.localizationName">
+          {{ this.event.localizationName }}
+        </mat-chip>
+        <mat-chip>
+          {{ this.event.unitPrice + this.event.currency }}
+        </mat-chip>
+      </div>
+      <div class="flex-container" id="custom-tab-list">
+        <app-custom-tab [label]="'Sold out'" [value]="this.event.isSoldOut + ''"></app-custom-tab>
+        <app-custom-tab [label]="'Start at'"
+                        [value]="this.event.startAt.toLocaleDateString() + ' ' + this.event.startAt.toLocaleTimeString()"></app-custom-tab>
+        <app-custom-tab [label]="'End at'"
+                        [value]="this.event.endAt.toLocaleDateString() + ' ' + this.event.endAt.toLocaleTimeString()"></app-custom-tab>
+        <app-custom-tab [label]="'Max ticket amount'" [value]="this.event.maxTicketAmount + ''"></app-custom-tab>
+        <app-custom-tab [label]="'Students discount'" [value]="this.event.studentsDiscount + '%'"></app-custom-tab>
+        <app-custom-tab [label]="'Children discount'" [value]="this.event.childrenDiscount + '%'"></app-custom-tab>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button (click)="this.onClick()">Buy ticket</button>
+    </mat-card-actions>
+  </div>
+  <app-image-viewer [image]="this.event.image" [imgClass]="'event-image'" [emptyImgClass]="'event-empty-image'"></app-image-viewer>
 </mat-card>

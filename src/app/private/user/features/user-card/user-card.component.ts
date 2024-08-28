@@ -21,6 +21,7 @@ import { ImageUploaderComponent } from '../../../../shared/firebase/features/ima
 import { authActions } from '../../../../public/auth/data-access/auth-actions';
 import { runUserEditMatDialogAction } from '../../../../shared/shared/util/util';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageViewerComponent } from '../../../../shared/shared/components/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-user-card',
@@ -39,7 +40,8 @@ import { MatDialog } from '@angular/material/dialog';
     NgIf,
     NgOptimizedImage,
     MatIcon,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    ImageViewerComponent
   ],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss'

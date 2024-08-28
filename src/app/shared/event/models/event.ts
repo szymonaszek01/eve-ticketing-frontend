@@ -15,5 +15,6 @@ export interface Event extends BaseEntity {
   address: string;
   localizationName: string;
   isWithoutSeats: boolean;
+  image: string;
   adminId: number;
 }

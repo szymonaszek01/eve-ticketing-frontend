@@ -1,0 +1,9 @@
+<div class="w-auto {{marginRight ? 'm-right' : ''}} {{marginLeft ? 'm-left' : ''}}">
+  <img *ngIf="this.image" class="{{!this.imgClass ? 'img-container' : this.imgClass}}" ngSrc="{{this.image}}"
+       alt="image-viewer" width="100" height="100">
+  <div *ngIf="!this.image" class="{{!this.emptyImgClass ? 'empty-image' : this.emptyImgClass}}">
+    <mat-icon>do_not_disturb</mat-icon>
+    <p>Empty image</p>
+  </div>
+  <ng-content></ng-content>
+</div>
